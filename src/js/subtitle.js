@@ -9,19 +9,21 @@ class Subtitle {
     }
 
     init() {
+        // 初始化字幕 父节点样式
         this.container.style.fontSize = this.options.fontSize;
         this.container.style.bottom = this.options.bottom;
         this.container.style.color = this.options.color;
 
         if (this.video.textTracks && this.video.textTracks[0]) {
             const track = this.video.textTracks[0];
-
+            // 当 TextTrack 变化时
             track.oncuechange = () => {
                 const cue = track.activeCues[0];
                 this.container.innerHTML = '';
                 if (cue) {
                     const template = document.createElement('div');
                     template.appendChild(cue.getCueAsHTML());
+                    // 根据换行重新替换标签
                     const trackHtml = template.innerHTML
                         .split(/\r?\n/)
                         .map((item) => `<p>${item}</p>`)

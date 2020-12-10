@@ -35,8 +35,8 @@ class Template {
         this.volumeButton = this.container.querySelector('.dplayer-volume');
         this.volumeButtonIcon = this.container.querySelector('.dplayer-volume-icon');
         this.volumeIcon = this.container.querySelector('.dplayer-volume-icon .dplayer-icon-content');
-        this.playedBar = this.container.querySelector('.dplayer-played');
-        this.loadedBar = this.container.querySelector('.dplayer-loaded');
+        this.playedBar = this.container.querySelector('.dplayer-played'); // 已加载进度
+        this.loadedBar = this.container.querySelector('.dplayer-loaded'); // 预加载进度
         this.playedBarWrap = this.container.querySelector('.dplayer-bar-wrap');
         this.playedBarTime = this.container.querySelector('.dplayer-bar-time');
         this.danmaku = this.container.querySelector('.dplayer-danmaku');
@@ -66,11 +66,11 @@ class Template {
         this.dtime = this.container.querySelector('.dplayer-dtime');
         this.controller = this.container.querySelector('.dplayer-controller');
         this.commentInput = this.container.querySelector('.dplayer-comment-input');
-        this.commentButton = this.container.querySelector('.dplayer-comment-icon');
-        this.commentSettingBox = this.container.querySelector('.dplayer-comment-setting-box');
+        this.commentButton = this.container.querySelector('.dplayer-comment-icon'); // 显示弹幕输入入口
+        this.commentSettingBox = this.container.querySelector('.dplayer-comment-setting-box'); // 弹幕颜色选择按钮
         this.commentSettingButton = this.container.querySelector('.dplayer-comment-setting-icon');
         this.commentSettingFill = this.container.querySelector('.dplayer-comment-setting-icon path');
-        this.commentSendButton = this.container.querySelector('.dplayer-send-icon');
+        this.commentSendButton = this.container.querySelector('.dplayer-send-icon'); // 发送按钮
         this.commentSendFill = this.container.querySelector('.dplayer-send-icon path');
         this.commentColorSettingBox = this.container.querySelector('.dplayer-comment-setting-color');
         this.browserFullButton = this.container.querySelector('.dplayer-full-icon');

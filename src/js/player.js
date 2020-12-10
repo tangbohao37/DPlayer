@@ -547,6 +547,7 @@ class DPlayer {
             url: this.quality.url,
             subtitle: this.options.subtitle,
         });
+        // 获取 video 元素
         const videoEle = new DOMParser().parseFromString(videoHTML, 'text/html').body.firstChild;
         this.template.videoWrap.insertBefore(videoEle, this.template.videoWrap.getElementsByTagName('div')[0]);
         this.prevVideo = this.video;

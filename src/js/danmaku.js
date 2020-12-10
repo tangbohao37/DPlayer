@@ -21,26 +21,45 @@ class Danmaku {
     }
 
     load() {
-        let apiurl;
-        if (this.options.api.maximum) {
-            apiurl = `${this.options.api.address}v3/?id=${this.options.api.id}&max=${this.options.api.maximum}`;
-        } else {
-            apiurl = `${this.options.api.address}v3/?id=${this.options.api.id}`;
-        }
+        // 浅拷贝弹幕地址  addition 附加弹幕
         const endpoints = (this.options.api.addition || []).slice(0);
-        endpoints.push(apiurl);
+
+        // 自定义弹幕服务器地址 拉取弹幕最大数量
+        if (this.options.api.address) {
+            let apiurl;
+            if (this.options.api.maximum) {
+                apiurl = `${this.options.api.address}v3/?id=${this.options.api.id}&max=${this.options.api.maximum}`;
+            } else {
+                apiurl = `${this.options.api.address}v3/?id=${this.options.api.id}`;
+            }
+            // apiurl 远程读取弹幕地址
+            endpoints.push(apiurl);
+        }
+
+        // danmaku_load_start 无具体实现
         this.events && this.events.trigger('danmaku_load_start', endpoints);
 
-        this._readAllEndpoints(endpoints, (results) => {
-            this.dan = [].concat.apply([], results).sort((a, b) => a.time - b.time);
-            window.requestAnimationFrame(() => {
-                this.frame();
+        if (endpoints.length) {
+            this._readAllEndpoints(endpoints, (results) => {
+                // es5语法
+                // 加载弹幕到弹幕库  === [].push(...results)
+                this.dan = [].concat.apply([], results).sort((a, b) => a.time - b.time);
+                /**
+                 * window.requestAnimationFrame()
+                 * 告诉浏览器——你希望执行一个动画，并且要求浏览器在下次重绘之前调用指定的回调函数更新动画。
+                 * 该方法需要传入一个回调函数作为参数，该回调函数会在浏览器下一次重绘之前执行
+                 */
+                window.requestAnimationFrame(() => {
+                    this.frame();
+                });
+
+                this.options.callback();
+
+                this.events && this.events.trigger('danmaku_load_end');
             });
-
+        } else {
             this.options.callback();
-
-            this.events && this.events.trigger('danmaku_load_end');
-        });
+        }
     }
 
     reload(newAPI) {
@@ -56,7 +75,7 @@ class Danmaku {
     _readAllEndpoints(endpoints, callback) {
         const results = [];
         let readCount = 0;
-
+        // 轮训读取弹幕引擎的弹幕加载到resuls里
         for (let i = 0; i < endpoints.length; ++i) {
             this.options.apiBackend.read({
                 url: endpoints[i],
@@ -80,7 +99,7 @@ class Danmaku {
             });
         }
     }
-
+    // 发送弹幕
     send(dan, callback) {
         const danmakuData = {
             token: this.options.api.token,
@@ -91,14 +110,17 @@ class Danmaku {
             color: dan.color,
             type: dan.type,
         };
-        this.options.apiBackend.send({
-            url: this.options.api.address + 'v3/',
-            data: danmakuData,
-            success: callback,
-            error: (msg) => {
-                this.options.error(msg || this.options.tran('Danmaku send failed'));
-            },
-        });
+        // 支持本地弹幕发送
+        if (this.options.api.address) {
+            this.options.apiBackend.send({
+                url: this.options.api.address + 'v3/',
+                data: danmakuData,
+                success: callback,
+                error: (msg) => {
+                    this.options.error(msg || this.options.tran('Danmaku send failed'));
+                },
+            });
+        }
 
         this.dan.splice(this.danIndex, 0, danmakuData);
         this.danIndex++;
@@ -112,7 +134,7 @@ class Danmaku {
 
         this.events && this.events.trigger('danmaku_send', danmakuData);
     }
-
+    // 递归调用绘制动画，使用requestAnimationFrame让弹幕更流畅
     frame() {
         if (this.dan.length && !this.paused && this.showing) {
             let item = this.dan[this.danIndex];
@@ -278,7 +300,9 @@ class Danmaku {
         if (!this.context) {
             const measureStyle = getComputedStyle(this.container.getElementsByClassName('dplayer-danmaku-item')[0], null);
             this.context = document.createElement('canvas').getContext('2d');
-            this.context.font = measureStyle.getPropertyValue('font');
+            // this.context.font = measureStyle.getPropertyValue('font');
+            const font = `${measureStyle.font} ${measureStyle.fontSize} ${measureStyle.fontFamily}`;
+            this.context.font = font;
         }
         return this.context.measureText(text).width;
     }
@@ -307,13 +331,7 @@ class Danmaku {
     }
 
     htmlEncode(str) {
-        return str
-            .replace(/&/g, '&amp;')
-            .replace(/</g, '&lt;')
-            .replace(/>/g, '&gt;')
-            .replace(/"/g, '&quot;')
-            .replace(/'/g, '&#x27;')
-            .replace(/\//g, '&#x2f;');
+        return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#x27;').replace(/\//g, '&#x2f;');
     }
 
     resize() {

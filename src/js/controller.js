@@ -5,7 +5,6 @@ import Icons from './icons';
 class Controller {
     constructor(player) {
         this.player = player;
-
         this.autoHideTimer = 0;
         if (!utils.isMobile) {
             this.player.container.addEventListener('mousemove', () => {
@@ -169,10 +168,12 @@ class Controller {
 
     initFullButton() {
         this.player.template.browserFullButton.addEventListener('click', () => {
+            // 浏览器全屏 === F11
             this.player.fullScreen.toggle('browser');
         });
 
         this.player.template.webFullButton.addEventListener('click', () => {
+            // 页面全屏
             this.player.fullScreen.toggle('web');
         });
     }
@@ -305,7 +306,7 @@ class Controller {
             if (this.player.video.played.length && !this.player.paused && !this.disableAutoHide) {
                 this.hide();
             }
-        }, 3000);
+        }, this.player.options.hideController);
     }
 
     show() {

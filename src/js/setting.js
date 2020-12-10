@@ -21,7 +21,7 @@ class Setting {
             } else {
                 this.loop = false;
             }
-            this.hide();
+            // this.hide();
         });
 
         // show danmaku
@@ -40,7 +40,7 @@ class Setting {
                 this.player.danmaku.hide();
             }
             this.player.user.set('danmaku', this.showDanmaku ? 1 : 0);
-            this.hide();
+            // this.hide();
         });
 
         // unlimit danmaku
@@ -56,7 +56,7 @@ class Setting {
                 this.player.danmaku.unlimit(false);
             }
             this.player.user.set('unlimited', this.unlimitDanmaku ? 1 : 0);
-            this.hide();
+            // this.hide();
         });
 
         // speed

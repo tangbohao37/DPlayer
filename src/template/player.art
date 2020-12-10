@@ -3,6 +3,7 @@
     {{ include './video.art' video }}
     {{ if options.logo }}
     <div class="dplayer-logo">
+        // 图片最大50px*50px
         <img src="{{ options.logo }}">
     </div>
     {{ /if }}
@@ -68,7 +69,7 @@
                 </label>
             </div>
         </div>
-        <input class="dplayer-comment-input" type="text" placeholder="{{ tran('Input danmaku, hit Enter') }}" maxlength="30">
+        <input class="dplayer-comment-input" type="text" placeholder="{{ tran('Input danmaku, hit Enter') }}" >
         <button class="dplayer-icon dplayer-send-icon" data-balloon="{{ tran('Send') }}" data-balloon-pos="up">
             <span class="dplayer-icon-content">{{@ icons.send }}</span>
         </button>

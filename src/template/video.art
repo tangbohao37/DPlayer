@@ -10,6 +10,7 @@
     {{ if url }}src="{{ url }}"{{ /if }}
     >
     {{ if enableSubtitle }}
+    // 拉取字幕
     <track kind="metadata" default src="{{ subtitle.url }}"></track>
     {{ /if }}
 </video>

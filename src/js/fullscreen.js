@@ -48,6 +48,7 @@ class FullScreen {
     isFullScreen(type = 'browser') {
         switch (type) {
             case 'browser':
+                // bom 全屏接口 判断是否已经全屏
                 return document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement || document.msFullscreenElement;
             case 'web':
                 return this.player.container.classList.contains('dplayer-fulled');
@@ -56,7 +57,7 @@ class FullScreen {
 
     request(type = 'browser') {
         const anotherType = type === 'browser' ? 'web' : 'browser';
-        const anotherTypeOn = this.isFullScreen(anotherType);
+        const anotherTypeOn = this.isFullScreen(anotherType); // 是否有 web/browser全屏开启
         if (!anotherTypeOn) {
             this.lastScrollPosition = utils.getScrollPosition();
         }
@@ -88,6 +89,9 @@ class FullScreen {
         if (anotherTypeOn) {
             this.cancel(anotherType);
         }
+
+        this.player.template.controller.classList.add('dplayer-controller-comment-fullscreen');
+        this.player.template.commentInput.focus();
     }
 
     cancel(type = 'browser') {
@@ -113,6 +117,7 @@ class FullScreen {
                 this.player.events.trigger('webfullscreen_cancel');
                 break;
         }
+        this.player.template.controller.classList.remove('dplayer-controller-comment-fullscreen');
     }
 
     toggle(type = 'browser') {

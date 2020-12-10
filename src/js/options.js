@@ -20,6 +20,7 @@ export default (options) => {
         video: {},
         contextmenu: [],
         mutex: true,
+        hideController: 1000, // 设置hover后 自动隐藏控制按钮的时间
         pluginOptions: { hls: {}, flv: {}, dash: {}, webtorrent: {} },
     };
     for (const defaultKey in defaultOption) {

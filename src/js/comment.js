@@ -36,6 +36,7 @@ class Comment {
 
         this.player.template.commentSendButton.addEventListener('click', () => {
             this.send();
+            this.hide();
         });
     }
 
