@@ -46,6 +46,8 @@ function () {
         _utils["default"].setScrollPosition(_this.lastScrollPosition);
 
         _this.player.events.trigger('fullscreen_cancel');
+
+        _this.player.template.controller.classList.remove('dplayer-controller-comment-fullscreen');
       }
     };
 
@@ -64,6 +66,8 @@ function () {
         _utils["default"].setScrollPosition(_this.lastScrollPosition);
 
         _this.player.events.trigger('fullscreen_cancel');
+
+        _this.player.template.controller.classList.remove('dplayer-controller-comment-fullscreen');
       }
     };
 

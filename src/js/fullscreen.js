@@ -19,6 +19,7 @@ class FullScreen {
             } else {
                 utils.setScrollPosition(this.lastScrollPosition);
                 this.player.events.trigger('fullscreen_cancel');
+                this.player.template.controller.classList.remove('dplayer-controller-comment-fullscreen');
             }
         };
         const docfullscreenchange = () => {
@@ -32,6 +33,7 @@ class FullScreen {
             } else {
                 utils.setScrollPosition(this.lastScrollPosition);
                 this.player.events.trigger('fullscreen_cancel');
+                this.player.template.controller.classList.remove('dplayer-controller-comment-fullscreen');
             }
         };
         if (/Firefox/.test(navigator.userAgent)) {
