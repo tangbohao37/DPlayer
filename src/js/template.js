@@ -29,6 +29,7 @@ class Template {
             },
         });
 
+        this.topArea = this.container.querySelector('.dplayer-top');
         this.volumeBar = this.container.querySelector('.dplayer-volume-bar-inner');
         this.volumeBarWrap = this.container.querySelector('.dplayer-volume-bar');
         this.volumeBarWrapWrap = this.container.querySelector('.dplayer-volume-bar-wrap');

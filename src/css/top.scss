@@ -1,0 +1,21 @@
+.dplayer-top-mask {
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAADGCAYAAAAT+OqFAAAAdklEQVQoz42QQQ7AIAgEF/T/D+kbq/RWAlnQyyazA4aoAB4FsBSA/bFjuF1EOL7VbrIrBuusmrt4ZZORfb6ehbWdnRHEIiITaEUKa5EJqUakRSaEYBJSCY2dEstQY7AuxahwXFrvZmWl2rh4JZ07z9dLtesfNj5q0FU3A5ObbwAAAABJRU5ErkJggg==)
+        repeat-x top;
+    height: 98px;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    transition: all 0.3s ease;
+}
+
+.dplayer-top {
+    display: flex;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 70px;
+    padding: 0 20px;
+    user-select: none;
+    transition: all 0.3s ease;
+}

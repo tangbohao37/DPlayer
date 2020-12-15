@@ -1,12 +1,6 @@
 <div class="dplayer-mask"></div>
 <div class="dplayer-video-wrap">
     {{ include './video.art' video }}
-    {{ if options.logo }}
-    <div class="dplayer-logo">
-        // 图片最大50px*50px
-        <img src="{{ options.logo }}">
-    </div>
-    {{ /if }}
     <div class="dplayer-danmaku"{{ if options.danmaku && options.danmaku.bottom }} style="margin-bottom:{{ options.danmaku.bottom }}"{{ /if }}>
         <div class="dplayer-danmaku-item dplayer-danmaku-item--demo"></div>
     </div>
@@ -18,6 +12,10 @@
         {{ /if }}
         <span class="diplayer-loading-icon">{{@ icons.loading }}</span>
     </div>
+</div>
+<div class="dplayer-top-mask"></div>
+<div class="dplayer-top">
+    {{@ options.top }}
 </div>
 <div class="dplayer-controller-mask"></div>
 <div class="dplayer-controller">

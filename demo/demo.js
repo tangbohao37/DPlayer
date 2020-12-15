@@ -35,6 +35,10 @@ function handleEvent() {
     });
 }
 
+function fun(e) {
+  console.log(1)
+}
+
 function initPlayers() {
     // dplayer-float
     // window.dpFloat = new DPlayer({
@@ -59,6 +63,7 @@ function initPlayers() {
         container: document.getElementById('dplayer1'),
         preload: 'none',
         screenshot: true,
+        top:"<div id='test' style='display: flex;flex: 1;font-size:40px' onclick='fun()'>22222</div>",
         video: {
             pic: 'https://i.loli.net/2019/06/06/5cf8c5d9c57b510947.png',
             thumbnails: 'https://i.loli.net/2019/06/06/5cf8c5d9cec8510758.jpg',
