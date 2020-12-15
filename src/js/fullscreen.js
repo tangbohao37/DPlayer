@@ -19,7 +19,10 @@ class FullScreen {
             } else {
                 utils.setScrollPosition(this.lastScrollPosition);
                 this.player.events.trigger('fullscreen_cancel');
-                this.player.template.controller.classList.remove('dplayer-controller-comment-fullscreen');
+                // 由全屏切换为网页全屏
+                if (!this.isFullScreen('web')) {
+                    this.player.template.controller.classList.remove('dplayer-controller-comment-fullscreen');
+                }
             }
         };
         const docfullscreenchange = () => {
@@ -33,7 +36,10 @@ class FullScreen {
             } else {
                 utils.setScrollPosition(this.lastScrollPosition);
                 this.player.events.trigger('fullscreen_cancel');
-                this.player.template.controller.classList.remove('dplayer-controller-comment-fullscreen');
+                // 由全屏切换为网页全屏
+                if (!this.isFullScreen('web')) {
+                    this.player.template.controller.classList.remove('dplayer-controller-comment-fullscreen');
+                }
             }
         };
         if (/Firefox/.test(navigator.userAgent)) {
@@ -66,6 +72,7 @@ class FullScreen {
 
         switch (type) {
             case 'browser':
+                this.player.controller.hide();
                 if (this.player.container.requestFullscreen) {
                     this.player.container.requestFullscreen();
                 } else if (this.player.container.mozRequestFullScreen) {
@@ -117,9 +124,9 @@ class FullScreen {
                 this.player.container.classList.remove('dplayer-fulled');
                 document.body.classList.remove('dplayer-web-fullscreen-fix');
                 this.player.events.trigger('webfullscreen_cancel');
+                this.player.template.controller.classList.remove('dplayer-controller-comment-fullscreen');
                 break;
         }
-        this.player.template.controller.classList.remove('dplayer-controller-comment-fullscreen');
     }
 
     toggle(type = 'browser') {
