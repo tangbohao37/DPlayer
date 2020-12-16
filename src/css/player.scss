@@ -140,11 +140,11 @@
 
     &.dplayer-hide-controller {
         cursor: none;
-        // .dplayer-top-mask,
-        // .dplayer-top {
-        //     opacity: 0;
-        //     transform: translateY(-100%);
-        // }
+        .dplayer-top-mask,
+        .dplayer-top {
+            opacity: 0;
+            transform: translateY(-100%);
+        }
         .dplayer-controller-mask {
             opacity: 0;
             transform: translateY(100%);
