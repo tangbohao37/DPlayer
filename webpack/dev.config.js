@@ -8,7 +8,7 @@ const cssnano = require('cssnano');
 module.exports = {
     mode: 'development',
 
-    devtool: 'cheap-module-source-map',
+    devtool: 'eval-source-map',
 
     entry: {
         DPlayer: './src/js/index.js',
@@ -23,6 +23,7 @@ module.exports = {
         umdNamedDefine: true,
         publicPath: '/',
     },
+    target: ['web', 'es5'],
 
     resolve: {
         modules: ['node_modules'],
@@ -84,7 +85,7 @@ module.exports = {
     devServer: {
         compress: true,
         contentBase: path.resolve(__dirname, '..', 'demo'),
-        clientLogLevel: 'none',
+        clientLogLevel: 'debug',
         quiet: false,
         open: true,
         historyApiFallback: {
@@ -103,10 +104,9 @@ module.exports = {
     ],
 
     node: {
-        dgram: 'empty',
-        fs: 'empty',
-        net: 'empty',
-        tls: 'empty',
+        global: false,
+        __filename: false,
+        __dirname: false,
     },
 
     performance: {

@@ -92,9 +92,8 @@ module.exports = {
     ],
 
     node: {
-        dgram: 'empty',
-        fs: 'empty',
-        net: 'empty',
-        tls: 'empty',
+        global: false,
+        __filename: false,
+        __dirname: false,
     },
 };
