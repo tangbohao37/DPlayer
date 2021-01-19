@@ -5,7 +5,7 @@ class Events {
         this.videoEvents = [
             'abort',
             'canplay',
-            'canplaythrough',
+            'canplaythrough', // 断流/加载完成
             'durationchange',
             'emptied',
             'ended',
@@ -26,6 +26,9 @@ class Events {
             'timeupdate',
             'volumechange',
             'waiting',
+            'on_sources_tatus_change',
+            'on_reconnect', // 网络异常，已重新连接
+            'on_connected', // 成功拉取数据元信息/成功拉到流
         ];
         this.playerEvents = [
             'screenshot',

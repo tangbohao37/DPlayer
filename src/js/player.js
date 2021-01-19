@@ -20,6 +20,7 @@ import HotKey from './hotkey';
 import ContextMenu from './contextmenu';
 import InfoPanel from './info-panel';
 import tplVideo from '../template/video.art';
+import FlvListener from './flvListener';
 
 let index = 0;
 const instances = [];
@@ -376,16 +377,19 @@ class DPlayer {
                                 Object.assign(this.options.pluginOptions.flv.mediaDataSource || {}, {
                                     type: 'flv',
                                     url: video.src,
+                                    isLive: this.options.live,
                                 }),
                                 this.options.pluginOptions.flv.config
                             );
                             this.plugins.flvjs = flvPlayer;
                             flvPlayer.attachMediaElement(video);
                             flvPlayer.load();
+                            new FlvListener(flvPlayer, this);
                             this.events.on('destroy', () => {
                                 flvPlayer.unload();
                                 flvPlayer.detachMediaElement();
                                 flvPlayer.destroy();
+                                flvPlayer.removeLogListener();
                                 delete this.plugins.flvjs;
                             });
                         } else {
