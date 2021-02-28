@@ -38,6 +38,21 @@
             <span class="dplayer-icon-content">{{@ icons.comment }}</span>
         </button>
     </div>
+    {{ if options.playbackSpeed }}
+    <div class="dplayer-speed" data-balloon="{{ tran('Speed') }}">
+        <button class="dplayer-icon dplayer-speed-icon">倍速</button>
+        <div class="dplayer-speed-mask">
+          <div class="dplayer-setting-speed-panel">
+              {{ each options.playbackSpeed }}
+              <div class="dplayer-setting-speed-item" data-speed="{{ $value }}">
+                  <span class="dplayer-label">{{ $value === 1 ? tran('Normal') : $value }}</span>
+              </div>
+              {{ /each }}
+          </div>
+        </div>
+    </div>
+    {{ /if }}
+
     {{ if options.subtitle }}
     <div class="dplayer-subtitle-btn">
         <button class="dplayer-icon dplayer-subtitle-icon" data-balloon="{{ tran('Hide subtitle') }}" data-balloon-pos="up">
@@ -45,16 +60,14 @@
         </button>
     </div>
     {{ /if }}
+
+
     <div class="dplayer-setting">
         <button class="dplayer-icon dplayer-setting-icon" data-balloon="{{ tran('Setting') }}" data-balloon-pos="up">
             <span class="dplayer-icon-content">{{@ icons.setting }}</span>
         </button>
         <div class="dplayer-setting-box">
             <div class="dplayer-setting-origin-panel">
-                <div class="dplayer-setting-item dplayer-setting-speed">
-                    <span class="dplayer-label">{{ tran('Speed') }}</span>
-                    <div class="dplayer-toggle">{{@ icons.right }}</div>
-                </div>
                 <div class="dplayer-setting-item dplayer-setting-loop">
                     <span class="dplayer-label">{{ tran('Loop') }}</span>
                     <div class="dplayer-toggle">
@@ -87,13 +100,6 @@
                     </div>
                 </div>
             </div>
-            <div class="dplayer-setting-speed-panel">
-                {{ each options.playbackSpeed }}
-                <div class="dplayer-setting-speed-item" data-speed="{{ $value }}">
-                    <span class="dplayer-label">{{ $value === 1 ? tran('Normal') : $value }}</span>
-                </div>
-                {{ /each }}
-            </div>
         </div>
     </div>
     <div class="dplayer-full">
@@ -104,4 +110,5 @@
             <span class="dplayer-icon-content">{{@ icons.full }}</span>
         </button>
     </div>
+
 </div>
