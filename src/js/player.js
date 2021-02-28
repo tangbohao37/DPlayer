@@ -254,8 +254,9 @@ class DPlayer {
         if (!isNaN(percentage)) {
             percentage = Math.max(percentage, 0);
             percentage = Math.min(percentage, 1);
-            this.bar.set('volume', percentage, 'width');
+            this.bar.set('volume', percentage, 'height');
             const formatPercentage = `${(percentage * 100).toFixed(0)}%`;
+            console.log('结果', percentage);
             this.template.volumeBarWrapWrap.dataset.balloon = formatPercentage;
             if (!nostorage) {
                 this.user.set('volume', percentage);

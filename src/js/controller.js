@@ -179,11 +179,16 @@ class Controller {
     }
 
     initVolumeButton() {
-        const vWidth = 35;
+        // const vWidth = 35;
+        const vHeight = 80;
 
         const volumeMove = (event) => {
             const e = event || window.event;
-            const percentage = ((e.clientX || e.changedTouches[0].clientX) - utils.getBoundingClientRectViewLeft(this.player.template.volumeBarWrap) - 5.5) / vWidth;
+            // this.player.template.volumeBarWrap 音量条
+            const rect = this.player.template.volumeBarWrap.getBoundingClientRect();
+            const percentage = (rect.bottom - e.clientY) / vHeight;
+            // const rectLeft = utils.getBoundingClientRectViewLeft(this.player.template.volumeBarWrap);
+            // const percentage = ((e.clientX || e.changedTouches[0].clientX) - rectLeft - 5.5) / vWidth;
             this.player.volume(percentage);
         };
         const volumeUp = () => {
@@ -192,9 +197,38 @@ class Controller {
             this.player.template.volumeButton.classList.remove('dplayer-volume-active');
         };
 
+        const showVolumeBar = () => {
+            this.player.template.volumeBarWrapWrap.style.display = 'block';
+        };
+        let timer = null;
+        const hideVolumeBar = () => {
+            timer = setTimeout(() => {
+                this.player.template.volumeBarWrapWrap.style.display = 'none';
+            }, 300);
+        };
+
+        this.player.template.volumeButton.addEventListener('mouseenter', () => {
+            if (timer !== null) {
+                clearTimeout(timer);
+            }
+            showVolumeBar();
+        });
+        this.player.template.volumeBarWrapWrap.addEventListener('mouseenter', () => {
+            if (timer !== null) {
+                clearTimeout(timer);
+            }
+            showVolumeBar();
+        });
+
+        this.player.template.volumeButton.addEventListener('mouseleave', () => {
+            hideVolumeBar();
+        });
+
         this.player.template.volumeBarWrapWrap.addEventListener('click', (event) => {
             const e = event || window.event;
-            const percentage = ((e.clientX || e.changedTouches[0].clientX) - utils.getBoundingClientRectViewLeft(this.player.template.volumeBarWrap) - 5.5) / vWidth;
+            // const percentage = ((e.clientX || e.changedTouches[0].clientX) - utils.getBoundingClientRectViewLeft(this.player.template.volumeBarWrap) - 5.5) / vWidth;
+            const rect = this.player.template.volumeBarWrap.getBoundingClientRect();
+            const percentage = (rect.bottom - e.clientY) / vHeight;
             this.player.volume(percentage);
         });
         this.player.template.volumeBarWrapWrap.addEventListener(utils.nameMap.dragStart, () => {
@@ -206,11 +240,11 @@ class Controller {
             if (this.player.video.muted) {
                 this.player.video.muted = false;
                 this.player.switchVolumeIcon();
-                this.player.bar.set('volume', this.player.volume(), 'width');
+                this.player.bar.set('volume', this.player.volume(), 'height');
             } else {
                 this.player.video.muted = true;
                 this.player.template.volumeIcon.innerHTML = Icons.volumeOff;
-                this.player.bar.set('volume', 0, 'width');
+                this.player.bar.set('volume', 0, 'height');
             }
         });
     }

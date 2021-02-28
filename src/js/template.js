@@ -12,6 +12,7 @@ class Template {
     }
 
     init() {
+        // 初始化模板
         this.container.innerHTML = tplPlayer({
             options: this.options,
             index: this.index,

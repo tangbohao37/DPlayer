@@ -373,41 +373,57 @@
             display: inline-block;
             cursor: pointer;
             height: 100%;
-            &:hover {
-                .dplayer-volume-bar-wrap .dplayer-volume-bar {
-                    width: 45px;
-                }
-                .dplayer-volume-bar-wrap .dplayer-volume-bar .dplayer-volume-bar-inner .dplayer-thumb {
-                    transform: scale(1);
-                }
-            }
-            &.dplayer-volume-active {
-                .dplayer-volume-bar-wrap .dplayer-volume-bar {
-                    width: 45px;
-                }
-                .dplayer-volume-bar-wrap .dplayer-volume-bar .dplayer-volume-bar-inner .dplayer-thumb {
-                    transform: scale(1);
-                }
-            }
+            // &:hover {
+            //     .dplayer-volume-bar-wrap .dplayer-volume-bar {
+            //         margin: 10px auto;
+            //         transform: scale(1);
+            //     }
+
+            //     .dplayer-volume-bar-wrap .dplayer-volume-bar .dplayer-volume-bar-inner .dplayer-thumb {
+            //         transform: scale(1);
+            //     }
+            // }
+            // &.dplayer-volume-active {
+            //     .dplayer-volume-bar-wrap .dplayer-volume-bar {
+            //         width: 45px;
+            //     }
+            // }
             .dplayer-volume-bar-wrap {
-                display: inline-block;
-                margin: 0 10px 0 -5px;
-                vertical-align: middle;
-                height: 100%;
+                // display: inline-block;
+                // margin: 0 10px 0 -5px;
+                // vertical-align: middle;
+                // height: 100%;
+
+                position: absolute;
+                display: none;
+                cursor: default;
+                bottom: 40px;
+                height: 100px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 32px;
+                background: rgba(21, 21, 21, 0.9);
+                border-radius: 2px;
                 .dplayer-volume-bar {
+                    // position: relative;
+                    // top: 17px;
+                    // width: 0;
+                    // height: 3px;
+                    // background: #aaa;
+                    // transition: all 0.3s ease-in-out;
+
                     position: relative;
-                    top: 17px;
-                    width: 0;
-                    height: 3px;
+                    margin: 0 auto;
+                    margin-top: 10px;
+                    height: 80px;
+                    width: 1px;
                     background: #aaa;
-                    transition: all 0.3s ease-in-out;
                     .dplayer-volume-bar-inner {
                         position: absolute;
                         bottom: 0;
                         left: 0;
-                        height: 100%;
-                        transition: all 0.1s ease;
-                        will-change: width;
+                        width: 1px;
+                        height: 80px;
                         .dplayer-thumb {
                             position: absolute;
                             top: 0;
@@ -418,8 +434,6 @@
                             width: 11px;
                             border-radius: 50%;
                             cursor: pointer;
-                            transition: all 0.3s ease-in-out;
-                            transform: scale(0);
                         }
                     }
                 }

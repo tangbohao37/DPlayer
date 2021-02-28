@@ -1,0 +1,16 @@
+<div class="dplayer-controller-mask"></div>
+<div class="dplayer-controller">
+    {{ include './comment.art'}}
+    {{ include './icons-left.art'}}
+    {{ include './icons-right.art'}}
+    <div class="dplayer-bar-wrap">
+        <div class="dplayer-bar-time hidden">00:00</div>
+        <div class="dplayer-bar-preview"></div>
+        <div class="dplayer-bar">
+            <div class="dplayer-loaded" style="width: 0;"></div>
+            <div class="dplayer-played" style="width: 0; background: {{ options.theme }}">
+                <span class="dplayer-thumb" style="background: {{ options.theme }}"></span>
+            </div>
+        </div>
+    </div>
+</div>

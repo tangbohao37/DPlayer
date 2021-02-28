@@ -24,8 +24,8 @@ const utils = {
      */
     // get element's view position
     getElementViewLeft: (element) => {
-        let actualLeft = element.offsetLeft;
-        let current = element.offsetParent;
+        let actualLeft = element.offsetLeft; // 相对父元素左上角偏移量
+        let current = element.offsetParent; // 父元素相对位置
         const elementScrollLeft = document.body.scrollLeft + document.documentElement.scrollLeft;
         if (!document.fullscreenElement && !document.mozFullScreenElement && !document.webkitFullscreenElement) {
             while (current !== null) {
