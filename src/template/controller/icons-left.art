@@ -9,4 +9,11 @@
         {{ if options.live }}
         <span class="dplayer-live-badge"><span class="dplayer-live-dot" style="background: {{ options.theme }};"></span>{{ tran('Live') }}</span>
         {{ /if }}
+
+        <div class="dplayer-showdan dplayer-setting-showdan">
+            <div class="dplayer-toggle">
+                <input class="dplayer-showdan-setting-input" type="checkbox" name="dplayer-toggle-dan" />
+                <label for="dplayer-toggle-dan"></label>
+            </div>
+        </div>
     </div>

@@ -75,13 +75,6 @@
                         <label for="dplayer-toggle"></label>
                     </div>
                 </div>
-                <div class="dplayer-setting-item dplayer-setting-showdan">
-                    <span class="dplayer-label">{{ tran('Show danmaku') }}</span>
-                    <div class="dplayer-toggle">
-                        <input class="dplayer-showdan-setting-input" type="checkbox" name="dplayer-toggle-dan" />
-                        <label for="dplayer-toggle-dan"></label>
-                    </div>
-                </div>
                 <div class="dplayer-setting-item dplayer-setting-danunlimit">
                     <span class="dplayer-label">{{ tran('Unlimited danmaku') }}</span>
                     <div class="dplayer-toggle">

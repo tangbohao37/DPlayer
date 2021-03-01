@@ -379,27 +379,7 @@
             display: inline-block;
             cursor: pointer;
             height: 100%;
-            // &:hover {
-            //     .dplayer-volume-bar-wrap .dplayer-volume-bar {
-            //         margin: 10px auto;
-            //         transform: scale(1);
-            //     }
-
-            //     .dplayer-volume-bar-wrap .dplayer-volume-bar .dplayer-volume-bar-inner .dplayer-thumb {
-            //         transform: scale(1);
-            //     }
-            // }
-            // &.dplayer-volume-active {
-            //     .dplayer-volume-bar-wrap .dplayer-volume-bar {
-            //         width: 45px;
-            //     }
-            // }
             .dplayer-volume-bar-wrap {
-                // display: inline-block;
-                // margin: 0 10px 0 -5px;
-                // vertical-align: middle;
-                // height: 100%;
-
                 position: absolute;
                 display: none;
                 cursor: default;
@@ -411,13 +391,6 @@
                 background: rgba(21, 21, 21, 0.9);
                 border-radius: 2px;
                 .dplayer-volume-bar {
-                    // position: relative;
-                    // top: 17px;
-                    // width: 0;
-                    // height: 3px;
-                    // background: #aaa;
-                    // transition: all 0.3s ease-in-out;
-
                     position: relative;
                     margin: 0 auto;
                     margin-top: 10px;
@@ -448,6 +421,32 @@
         .dplayer-subtitle-btn {
             display: inline-block;
             height: 100%;
+        }
+        .dplayer-showdan {
+            display: inline-block;
+            height: 100%;
+            border: none;
+            outline: none;
+            padding: 0 10px;
+            cursor: pointer;
+            vertical-align: middle;
+            align-items: center;
+            box-sizing: border-box;
+            position: relative;
+            .dplayer-toggle {
+                position: relative;
+                width: 32px;
+                height: 20px;
+                text-align: center;
+                font-size: 0;
+                top: 50%;
+                transform: translateY(-50%);
+                right: 0px;
+
+                input + label:after {
+                    content: '弹';
+                }
+            }
         }
         .dplayer-setting {
             display: inline-block;
@@ -683,11 +682,10 @@
             input + label {
                 display: inline-block;
                 position: relative;
-                box-shadow: rgb(223, 223, 223) 0 0 0 0 inset;
-                border: 1px solid rgb(223, 223, 223);
-                height: 20px;
-                width: 32px;
+                height: 18px;
+                width: 30px;
                 border-radius: 10px;
+                background: rgb(60, 60, 60);
                 box-sizing: border-box;
                 cursor: pointer;
                 transition: 0.2s ease-in-out;
@@ -706,13 +704,15 @@
             input + label:after {
                 content: '';
                 position: absolute;
+                font-size: 13px;
+                color: rgb(60, 60, 60);
+                line-height: 18px;
                 display: block;
                 left: 0;
                 top: 0;
                 border-radius: 15px;
                 background: #fff;
                 transition: 0.2s ease-in-out;
-                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
                 height: 18px;
                 width: 18px;
             }
@@ -721,7 +721,10 @@
             }
             input:checked + label:before {
                 width: 30px;
-                background: rgba(255, 255, 255, 0.5);
+                background-color: rgb(0, 161, 214);
+            }
+            input:checked + label:after {
+                color: rgb(0, 161, 214);
             }
             input:checked + label:after {
                 left: 12px;
