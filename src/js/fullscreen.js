@@ -20,9 +20,11 @@ class FullScreen {
             this.player.resize();
             if (this.isFullScreen('browser')) {
                 this.player.events.trigger('fullscreen');
+                this.player.comment.showInner();
             } else {
                 utils.setScrollPosition(this.lastScrollPosition);
                 this.player.events.trigger('fullscreen_cancel');
+                this.player.comment.hideInner();
                 // 由全屏切换为网页全屏
                 if (!this.isFullScreen('web')) {
                     this.player.template.controller.classList.remove('dplayer-controller-comment-fullscreen');
@@ -37,9 +39,11 @@ class FullScreen {
             this.player.resize();
             if (fullEle) {
                 this.player.events.trigger('fullscreen');
+                this.player.comment.showInner();
             } else {
                 utils.setScrollPosition(this.lastScrollPosition);
                 this.player.events.trigger('fullscreen_cancel');
+                this.player.comment.hideInner();
                 // 由全屏切换为网页全屏
                 if (!this.isFullScreen('web')) {
                     this.player.template.controller.classList.remove('dplayer-controller-comment-fullscreen');

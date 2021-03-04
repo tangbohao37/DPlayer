@@ -347,6 +347,10 @@
                 transition: all 0.3s ease-in-out;
                 overflow: hidden;
                 z-index: 2;
+                .dplayer-toggle {
+                    display: inline-block;
+                    right: 10px;
+                }
                 & > div {
                     display: none;
                     &.dplayer-setting-origin-panel {
