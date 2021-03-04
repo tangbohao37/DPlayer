@@ -1,7 +1,8 @@
 <div class="dplayer-controller-mask"></div>
 <div class="dplayer-controller">
-    {{ include './comment.art'}}
     {{ include './icons-left.art'}}
+    <div class="dplayer-icons dplayer-inner-comment-box">
+    </div>
     {{ include './icons-right.art'}}
     <div class="dplayer-bar-wrap">
         <div class="dplayer-bar-time hidden">00:00</div>

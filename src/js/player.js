@@ -21,6 +21,7 @@ import ContextMenu from './contextmenu';
 import InfoPanel from './info-panel';
 import tplVideo from '../template/video.art';
 import FlvListener from './flvListener';
+import BottomArea from './bottomArea';
 
 let index = 0;
 const instances = [];
@@ -75,6 +76,8 @@ class DPlayer {
         this.bezel = new Bezel(this.template.bezel);
 
         this.fullScreen = new FullScreen(this);
+
+        this.bottomArea = new BottomArea(this);
 
         this.controller = new Controller(this);
 
@@ -552,7 +555,7 @@ class DPlayer {
             url: this.quality.url,
             subtitle: this.options.subtitle,
         });
-        // 获取 video 元素
+        // 生成新的 video 元素
         const videoEle = new DOMParser().parseFromString(videoHTML, 'text/html').body.firstChild;
         this.template.videoWrap.insertBefore(videoEle, this.template.videoWrap.getElementsByTagName('div')[0]);
         this.prevVideo = this.video;

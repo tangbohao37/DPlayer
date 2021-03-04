@@ -1,0 +1,13 @@
+<div class="dplayer-main-container">
+{{ include './player.art' }}
+</div>
+<div class="dplayer-video-bottom-area">
+  <div class="dplayer-video-bottom-area-left">
+    <p class="dplayer-video-bottom-area-left-info">12321人正在观看</p>
+    <div class="show-dan-box">
+    {{ include './controller/show-dan.art' }}
+    </div>
+  </div>
+  <div class="dplayer-video-bottom-area-right">
+  </div>
+</div>

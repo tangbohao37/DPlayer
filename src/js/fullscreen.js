@@ -5,10 +5,14 @@ class FullScreen {
         this.player = player;
         this.lastScrollPosition = { left: 0, top: 0 };
         this.player.events.on('webfullscreen', () => {
+            this.player.comment.showInner();
+            this.player.bottomArea.toggle();
             this.player.resize();
         });
         this.player.events.on('webfullscreen_cancel', () => {
             this.player.resize();
+            this.player.bottomArea.toggle();
+            this.player.comment.hideInner();
             utils.setScrollPosition(this.lastScrollPosition);
         });
 
@@ -100,7 +104,7 @@ class FullScreen {
         }
 
         this.player.template.controller.classList.add('dplayer-controller-comment-fullscreen');
-        this.player.template.commentInput.focus();
+        this.player.comment.commentInput.focus();
     }
 
     cancel(type = 'browser') {

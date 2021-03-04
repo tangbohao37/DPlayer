@@ -1,5 +1,5 @@
 import Icons from './icons';
-import tplPlayer from '../template/player.art';
+import tplPlayer from '../template/index.art';
 import utils from './utils';
 
 class Template {
@@ -67,6 +67,8 @@ class Template {
         this.danmakuOpacityBox = this.container.querySelector('.dplayer-setting-danmaku');
         this.dtime = this.container.querySelector('.dplayer-dtime');
         this.controller = this.container.querySelector('.dplayer-controller');
+        this.commentBox = this.container.querySelector('.dplayer-comment-box');
+        this.commentInnerBox = this.container.querySelector('.dplayer-inner-comment-box');
         this.commentInput = this.container.querySelector('.dplayer-comment-input');
         this.commentButton = this.container.querySelector('.dplayer-comment-icon'); // 显示弹幕输入入口
         this.commentSettingBox = this.container.querySelector('.dplayer-comment-setting-box'); // 弹幕颜色选择按钮
@@ -100,6 +102,9 @@ class Template {
         this.infoDanmakuId = this.container.querySelector('.dplayer-info-panel-item-danmaku-id .dplayer-info-panel-item-data');
         this.infoDanmakuApi = this.container.querySelector('.dplayer-info-panel-item-danmaku-api .dplayer-info-panel-item-data');
         this.infoDanmakuAmount = this.container.querySelector('.dplayer-info-panel-item-danmaku-amount .dplayer-info-panel-item-data');
+        this.bottomArea = this.container.querySelector('.dplayer-video-bottom-area');
+        this.bottomAreaRight = this.container.querySelector('.dplayer-video-bottom-area .dplayer-video-bottom-area-right');
+        this.bottomAreaLeft = this.container.querySelector('.dplayer-video-bottom-area .dplayer-video-bottom-area-left');
     }
 }
 

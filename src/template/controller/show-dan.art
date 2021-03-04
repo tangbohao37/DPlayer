@@ -1,0 +1,3 @@
+<div class="dplayer-showdan dplayer-setting-showdan">
+    {{ include '../conponents/switch.art' }}
+</div>

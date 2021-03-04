@@ -1,0 +1,4 @@
+<div class="dplayer-toggle">
+    <input class="dplayer-showdan-setting-input" type="checkbox" name="dplayer-toggle-dan" />
+    <label for="dplayer-toggle-dan"></label>
+</div>

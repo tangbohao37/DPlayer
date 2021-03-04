@@ -1,19 +1,14 @@
- <div class="dplayer-icons dplayer-icons-left">
-        <button class="dplayer-icon dplayer-play-icon">
-            <span class="dplayer-icon-content">{{@ icons.play }}</span>
-        </button>
-        <span class="dplayer-time">
-            <span class="dplayer-ptime">0:00</span> /
-            <span class="dplayer-dtime">0:00</span>
-        </span>
-        {{ if options.live }}
-        <span class="dplayer-live-badge"><span class="dplayer-live-dot" style="background: {{ options.theme }};"></span>{{ tran('Live') }}</span>
-        {{ /if }}
-
-        <div class="dplayer-showdan dplayer-setting-showdan">
-            <div class="dplayer-toggle">
-                <input class="dplayer-showdan-setting-input" type="checkbox" name="dplayer-toggle-dan" />
-                <label for="dplayer-toggle-dan"></label>
-            </div>
-        </div>
+<div class="dplayer-icons dplayer-icons-left">
+    <button class="dplayer-icon dplayer-play-icon">
+        <span class="dplayer-icon-content">{{@ icons.play }}</span>
+    </button>
+    <span class="dplayer-time">
+        <span class="dplayer-ptime">0:00</span> /
+        <span class="dplayer-dtime">0:00</span>
+    </span>
+    {{ if options.live }}
+    <span class="dplayer-live-badge"><span class="dplayer-live-dot" style="background: {{ options.theme }};"></span>{{ tran('Live') }}</span>
+    {{ /if }}
+    <div class="show-dan-box">
     </div>
+</div>
