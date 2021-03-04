@@ -1,12 +1,10 @@
 .dplayer-toggle {
-    width: 32px;
-    height: 20px;
+    width: 35px;
+    height: 22px;
     text-align: center;
     font-size: 0;
     vertical-align: middle;
     position: absolute;
-    top: 5px;
-    right: 10px;
     input {
         max-height: 0;
         max-width: 0;
@@ -15,12 +13,12 @@
     input + label {
         display: inline-block;
         position: relative;
-        height: 18px;
-        width: 30px;
+        height: 22px;
+        width: 35px;
         border-radius: 10px;
-        background: rgb(60, 60, 60);
         box-sizing: border-box;
         cursor: pointer;
+        background-color: rgb(60, 60, 60);
         transition: 0.2s ease-in-out;
     }
     input + label:before {
@@ -29,8 +27,9 @@
         display: block;
         height: 18px;
         width: 18px;
-        top: 0;
-        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        left: 1px;
         border-radius: 15px;
         transition: 0.2s ease-in-out;
     }
@@ -41,8 +40,9 @@
         color: rgb(60, 60, 60);
         line-height: 18px;
         display: block;
-        left: 0;
-        top: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        left: 2px;
         border-radius: 15px;
         background: #fff;
         transition: 0.2s ease-in-out;
@@ -50,7 +50,7 @@
         width: 18px;
     }
     input:checked + label {
-        border-color: rgba(255, 255, 255, 0.5);
+        background-color: rgb(0, 161, 214);
     }
     input:checked + label:before {
         width: 30px;
@@ -60,6 +60,6 @@
         color: rgb(0, 161, 214);
     }
     input:checked + label:after {
-        left: 12px;
+        left: 15px;
     }
 }

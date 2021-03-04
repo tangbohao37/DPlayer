@@ -1,5 +1,5 @@
 <div class="dplayer-icons dplayer-comment-box">
-    <button class="dplayer-icon dplayer-comment-box-icon dplayer-comment-setting-icon" data-balloon="{{ tran('Setting') }}" data-balloon-pos="up">
+    <button class="dplayer-comment-box-icon dplayer-comment-setting-icon" data-balloon="{{ tran('Setting') }}" data-balloon-pos="up">
         <span class="dplayer-icon-content">{{@ icons.pallette }}</span>
     </button>
     <div class="dplayer-comment-setting-box">
@@ -47,7 +47,7 @@
         </div>
     </div>
     <input class="dplayer-comment-input" type="text" placeholder="{{ tran('Input danmaku, hit Enter') }}" >
-    <button class="dplayer-icon dplayer-comment-box-icon dplayer-send-icon" data-balloon="{{ tran('Send') }}" data-balloon-pos="up">
-        <span class="dplayer-icon-content">{{@ icons.send }}</span>
+    <button class="dplayer-comment-box-icon dplayer-send-icon" data-balloon="{{ tran('Send') }}" data-balloon-pos="up">
+        <span class="dplayer-icon-content">发送</span>
     </button>
 </div>

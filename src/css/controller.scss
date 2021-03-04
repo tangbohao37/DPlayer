@@ -24,11 +24,13 @@
             display: none;
         }
         .dplayer-icons.dplayer-comment-box {
+            border: none;
             display: flex;
         }
     }
     &.dplayer-controller-comment-fullscreen {
         .dplayer-icons.dplayer-comment-box {
+            border: none;
             display: flex;
             margin: 0 auto;
         }
@@ -37,6 +39,7 @@
         }
         @media (max-width: 900px) {
             .dplayer-icons.dplayer-comment-box {
+                border: none;
                 display: flex;
             }
         }
@@ -172,18 +175,23 @@
     .dplayer-icons {
         height: 38px;
         bottom: 0;
+        color: #fff;
         &.dplayer-inner-comment-box {
             display: flex;
             flex: 1;
             height: 30px;
             position: relative;
+            .dplayer-comment-box-icon,
+            .dplayer-comment-input {
+                color: #fff;
+                &::placeholder {
+                    color: #fff;
+                }
+            }
         }
         &.dplayer-icons-left {
             flex: 1;
             position: relative;
-            .dplayer-icon {
-                padding: 7px;
-            }
             .show-dan-box {
                 display: inline;
             }
@@ -221,27 +229,26 @@
             border: none;
             background-color: transparent;
             outline: none;
+            color: #fff;
             cursor: pointer;
             vertical-align: middle;
             box-sizing: border-box;
             display: inline-block;
-            .dplayer-icon-content {
-                transition: all 0.2s ease-in-out;
-                opacity: 0.8;
-            }
-            &:hover {
-                .dplayer-icon-content {
-                    opacity: 1;
-                }
-            }
+            // .dplayer-icon-content {
+            //     transition: all 0.2s ease-in-out;
+            //     opacity: 0.8;
+            // }
+            // &:hover {
+            //     .dplayer-icon-content {
+            //         opacity: 1;
+            //     }
+            // }
             &.dplayer-quality-icon {
-                color: #fff;
                 width: auto;
                 line-height: 22px;
                 font-size: 14px;
             }
             &.dplayer-speed-icon {
-                color: #fff;
                 width: auto;
                 line-height: 22px;
                 font-size: 12px;
