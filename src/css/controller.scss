@@ -33,7 +33,13 @@
             border: none;
             display: flex;
             margin: 0 auto;
+            .dplayer-comment-box-icon,
+            .dplayer-comment-setting-icon,
+            .dplayer-comment-input {
+                border: none;
+            }
         }
+
         .dplayer-comment {
             display: none !important;
         }
@@ -41,6 +47,11 @@
             .dplayer-icons.dplayer-comment-box {
                 border: none;
                 display: flex;
+                .dplayer-comment-box-icon,
+                .dplayer-comment-setting-icon,
+                .dplayer-comment-input {
+                    border: none;
+                }
             }
         }
     }

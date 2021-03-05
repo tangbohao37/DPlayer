@@ -59,7 +59,7 @@ function initPlayers() {
         container: document.getElementById('dplayer1'),
         preload: 'none',
         screenshot: true,
-        top:"<div id='test' style='display: flex;flex: 1;font-size:40px' onclick='fun()'>22222</div>",
+        top:"<div id='test' style='display: flex;flex: 1;font-size:40px; color:#fff' onclick='fun()'>这里是顶部区域</div>",
         live:false,
         video: {
             quality: [{

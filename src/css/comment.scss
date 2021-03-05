@@ -4,10 +4,6 @@
     z-index: 2;
     box-sizing: border-box;
     border-radius: 3px;
-    border-width: 1px 0 1px 1px;
-    border-color: #e4e4e4;
-    border-style: solid;
-    box-sizing: border-box;
     align-self: center;
     align-items: center;
     height: 100%;
@@ -21,6 +17,7 @@
         color: rgb(117, 117, 117);
         border: none;
         background-color: transparent;
+        border-radius: 3px 0 0 3px;
         outline: none;
         cursor: pointer;
         vertical-align: middle;
@@ -32,6 +29,9 @@
         }
     }
     .dplayer-comment-setting-icon {
+        border-width: 1px 0 1px 1px;
+        border-color: #e4e4e4;
+        border-style: solid;
         max-height: 28px;
         height: 100%;
         width: 40px;
@@ -126,13 +126,14 @@
         }
     }
     .dplayer-comment-input {
+        border-width: 1px 0 1px 0;
+        border-color: #e4e4e4;
+        border-style: solid;
         outline: none;
-        border: none;
         padding: 8px 20px;
         font-size: 14px;
         line-height: 18px;
         text-align: center;
-        border-radius: 4px;
         background: none;
         margin: 0;
         height: 100%;
