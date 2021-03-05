@@ -10,5 +10,6 @@
     <span class="dplayer-live-badge"><span class="dplayer-live-dot" style="background: {{ options.theme }};"></span>{{ tran('Live') }}</span>
     {{ /if }}
     <div class="show-dan-box">
+    {{ include './show-dan.art' }}
     </div>
 </div>

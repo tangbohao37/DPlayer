@@ -204,7 +204,7 @@
             flex: 1;
             position: relative;
             .show-dan-box {
-                display: inline;
+                display: none;
             }
         }
         &.dplayer-icons-right {
@@ -263,9 +263,6 @@
                 width: auto;
                 line-height: 22px;
                 font-size: 12px;
-            }
-            &.dplayer-comment-icon {
-                padding: 10px 9px 9px;
             }
             &.dplayer-setting-icon {
                 padding-top: 8.5px;

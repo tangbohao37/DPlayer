@@ -22,11 +22,7 @@
         <span class="dplayer-icon-content">{{@ icons.airplay }}</span>
     </div>
     {{ /if }}
-    <div class="dplayer-comment">
-        <button class="dplayer-icon dplayer-comment-icon" data-balloon="{{ tran('Send danmaku') }}" data-balloon-pos="up">
-            <span class="dplayer-icon-content">{{@ icons.comment }}</span>
-        </button>
-    </div>
+
     {{ if options.playbackSpeed }}
     <div class="dplayer-speed" data-balloon="{{ tran('Speed') }}">
         <button class="dplayer-icon dplayer-speed-icon">倍速</button>

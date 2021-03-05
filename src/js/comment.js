@@ -28,10 +28,6 @@ class Comment {
         // this.player.template.mask.addEventListener('click', () => {
         //     this.hide();
         // });
-        this.commentButton.addEventListener('click', () => {
-            this.show();
-        });
-
         this.commentSettingButton.addEventListener('click', () => {
             this.toggleSetting();
         });
@@ -100,10 +96,8 @@ class Comment {
     }
 
     bind() {
-        this.commentBox = this.player.container.querySelector('.dplayer-comment-box');
         this.commentInnerBox = this.player.container.querySelector('.dplayer-inner-comment-box');
         this.commentInput = this.player.container.querySelector('.dplayer-comment-input');
-        this.commentButton = this.player.container.querySelector('.dplayer-comment-icon'); // 显示弹幕输入入口
         this.commentSettingBox = this.player.container.querySelector('.dplayer-comment-setting-box'); // 弹幕颜色选择按钮
         this.commentSettingButton = this.player.container.querySelector('.dplayer-comment-setting-icon');
         this.commentSettingFill = this.player.container.querySelector('.dplayer-comment-setting-icon path');

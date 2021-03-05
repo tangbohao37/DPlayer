@@ -55,8 +55,8 @@ class Template {
         this.mask = this.container.querySelector('.dplayer-mask');
         this.loop = this.container.querySelector('.dplayer-setting-loop');
         this.loopToggle = this.container.querySelector('.dplayer-setting-loop .dplayer-toggle-setting-input');
-        this.showDanmaku = this.container.querySelector('.dplayer-setting-showdan');
-        this.showDanmakuToggle = this.container.querySelector('.dplayer-showdan-setting-input');
+        this.showDanmaku = this.container.querySelectorAll('.dplayer-setting-showdan');
+        this.showDanmakuToggle = this.container.querySelectorAll('.dplayer-showdan-setting-input');
         this.unlimitDanmaku = this.container.querySelector('.dplayer-setting-danunlimit');
         this.unlimitDanmakuToggle = this.container.querySelector('.dplayer-danunlimit-setting-input');
         this.speed = this.container.querySelector('.dplayer-speed');
@@ -67,10 +67,7 @@ class Template {
         this.danmakuOpacityBox = this.container.querySelector('.dplayer-setting-danmaku');
         this.dtime = this.container.querySelector('.dplayer-dtime');
         this.controller = this.container.querySelector('.dplayer-controller');
-        this.commentBox = this.container.querySelector('.dplayer-comment-box');
-        this.commentInnerBox = this.container.querySelector('.dplayer-inner-comment-box');
         this.commentInput = this.container.querySelector('.dplayer-comment-input');
-        this.commentButton = this.container.querySelector('.dplayer-comment-icon'); // 显示弹幕输入入口
         this.commentSettingBox = this.container.querySelector('.dplayer-comment-setting-box'); // 弹幕颜色选择按钮
         this.commentSettingButton = this.container.querySelector('.dplayer-comment-setting-icon');
         this.commentSettingFill = this.container.querySelector('.dplayer-comment-setting-icon path');

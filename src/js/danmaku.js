@@ -16,6 +16,7 @@ class Danmaku {
         this.events = this.options.events;
         this.unlimited = this.options.unlimited;
         this._measure('');
+        this.template = this.options.template;
 
         this.load();
     }
@@ -342,11 +343,23 @@ class Danmaku {
         }
     }
 
+    get isShowing() {
+        return this.showing;
+    }
+
+    showInnerDanBox() {
+        this.template.controller.querySelector('.dplayer-controller .dplayer-icons-left .show-dan-box').style.display = 'inline';
+    }
+
+    hideInnerDanBox() {
+        this.template.controller.querySelector('.dplayer-controller .dplayer-icons-left .show-dan-box').style.display = 'none';
+    }
+
     hide() {
         this.showing = false;
         this.pause();
         this.clear();
-
+        this.template.showDanmakuToggle.forEach((toggle) => (toggle.checked = this.showing));
         this.events && this.events.trigger('danmaku_hide');
     }
 
@@ -354,7 +367,7 @@ class Danmaku {
         this.seek();
         this.showing = true;
         this.play();
-
+        this.template.showDanmakuToggle.forEach((toggle) => (toggle.checked = this.showing));
         this.events && this.events.trigger('danmaku_show');
     }
 

@@ -28,19 +28,21 @@ class Setting {
         this.showDanmaku = this.player.user.get('danmaku');
         if (!this.showDanmaku) {
             this.player.danmaku && this.player.danmaku.hide();
+        } else {
+            this.player.danmaku && this.player.danmaku.show();
         }
-        this.player.template.showDanmakuToggle.checked = this.showDanmaku;
-        this.player.template.showDanmaku.addEventListener('click', () => {
-            this.player.template.showDanmakuToggle.checked = !this.player.template.showDanmakuToggle.checked;
-            if (this.player.template.showDanmakuToggle.checked) {
-                this.showDanmaku = true;
-                this.player.danmaku.show();
-            } else {
-                this.showDanmaku = false;
-                this.player.danmaku.hide();
-            }
-            this.player.user.set('danmaku', this.showDanmaku ? 1 : 0);
-            // this.hide();
+        this.player.template.showDanmaku.forEach((each) => {
+            each.addEventListener('click', () => {
+                if (!this.player.danmaku.isShowing) {
+                    this.showDanmaku = true;
+                    this.player.danmaku.show();
+                } else {
+                    this.showDanmaku = false;
+                    this.player.danmaku.hide();
+                }
+                this.player.user.set('danmaku', this.showDanmaku ? 1 : 0);
+                // this.hide();
+            });
         });
 
         // unlimit danmaku

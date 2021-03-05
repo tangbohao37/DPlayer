@@ -83,6 +83,7 @@ class DPlayer {
 
         if (this.options.danmaku) {
             this.danmaku = new Danmaku({
+                template: this.template,
                 container: this.template.danmaku,
                 opacity: this.user.get('opacity'),
                 callback: () => {
@@ -259,7 +260,6 @@ class DPlayer {
             percentage = Math.min(percentage, 1);
             this.bar.set('volume', percentage, 'height');
             const formatPercentage = `${(percentage * 100).toFixed(0)}%`;
-            console.log('结果', percentage);
             this.template.volumeBarWrapWrap.dataset.balloon = formatPercentage;
             if (!nostorage) {
                 this.user.set('volume', percentage);

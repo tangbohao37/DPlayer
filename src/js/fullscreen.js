@@ -6,13 +6,15 @@ class FullScreen {
         this.lastScrollPosition = { left: 0, top: 0 };
         this.player.events.on('webfullscreen', () => {
             this.player.comment.showInner();
+            this.player.danmaku.showInnerDanBox();
             this.player.bottomArea.toggle();
             this.player.resize();
         });
         this.player.events.on('webfullscreen_cancel', () => {
-            this.player.resize();
             this.player.bottomArea.toggle();
             this.player.comment.hideInner();
+            this.player.danmaku.hideInnerDanBox();
+            this.player.resize();
             utils.setScrollPosition(this.lastScrollPosition);
         });
 
@@ -20,10 +22,12 @@ class FullScreen {
             this.player.resize();
             if (this.isFullScreen('browser')) {
                 this.player.events.trigger('fullscreen');
+                this.player.danmaku.showInnerDanBox();
                 this.player.comment.showInner();
             } else {
                 utils.setScrollPosition(this.lastScrollPosition);
                 this.player.events.trigger('fullscreen_cancel');
+                this.player.danmaku.hideInnerDanBox();
                 this.player.comment.hideInner();
                 // 由全屏切换为网页全屏
                 if (!this.isFullScreen('web')) {
