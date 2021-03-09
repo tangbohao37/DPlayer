@@ -1,87 +1,10 @@
+const baseConfig = require('./common.config');
+const { merge } = require('webpack-merge');
 const path = require('path');
-const webpack = require('webpack');
-const GitRevisionPlugin = require('git-revision-webpack-plugin');
-const gitRevisionPlugin = new GitRevisionPlugin();
-const autoprefixer = require('autoprefixer');
-const cssnano = require('cssnano');
 
-module.exports = {
+const devConfig = {
     mode: 'development',
-
     devtool: 'eval-source-map',
-
-    entry: {
-        DPlayer: './src/js/index.js',
-    },
-
-    output: {
-        path: path.resolve(__dirname, '..', 'dist'),
-        filename: '[name].js',
-        library: '[name]',
-        libraryTarget: 'umd',
-        libraryExport: 'default',
-        umdNamedDefine: true,
-        publicPath: '/',
-    },
-    target: ['web', 'es5'],
-
-    resolve: {
-        modules: ['node_modules'],
-        extensions: ['.js', '.scss'],
-    },
-
-    module: {
-        strictExportPresence: true,
-        rules: [
-            {
-                test: /\.js$/,
-                use: [
-                    {
-                        loader: 'babel-loader',
-                        options: {
-                            cacheDirectory: true,
-                            presets: ['@babel/preset-env'],
-                        },
-                    },
-                ],
-            },
-            {
-                test: /\.scss$/,
-                use: [
-                    'style-loader',
-                    {
-                        loader: 'css-loader',
-                        options: {
-                            importLoaders: 1,
-                        },
-                    },
-                    {
-                        loader: 'postcss-loader',
-                        options: {
-                            plugins: [autoprefixer, cssnano],
-                        },
-                    },
-                    'sass-loader',
-                ],
-            },
-            {
-                test: /\.(png|jpg)$/,
-                loader: 'url-loader',
-                options: {
-                    limit: 40000,
-                },
-            },
-            {
-                test: /\.svg$/,
-                loader: 'svg-inline-loader',
-            },
-            {
-                test: /\.art$/,
-                loader: 'art-template-loader',
-            },
-        ],
-    },
-
     devServer: {
         compress: true,
         contentBase: path.resolve(__dirname, '..', 'demo'),
@@ -95,21 +18,9 @@ module.exports = {
             ignored: /node_modules/,
         },
     },
-
-    plugins: [
-        new webpack.DefinePlugin({
-            DPLAYER_VERSION: `"${require('../package.json').version}"`,
-            GIT_HASH: JSON.stringify(gitRevisionPlugin.version()),
-        }),
-    ],
-
-    node: {
-        global: false,
-        __filename: false,
-        __dirname: false,
-    },
-
     performance: {
         hints: false,
     },
 };
+
+module.exports = merge(baseConfig, devConfig);
