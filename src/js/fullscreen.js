@@ -5,15 +5,20 @@ class FullScreen {
         this.player = player;
         this.lastScrollPosition = { left: 0, top: 0 };
         this.player.events.on('webfullscreen', () => {
-            this.player.comment.showInner();
-            this.player.danmaku.showInnerDanBox();
-            this.player.bottomArea.toggle();
+            if (this.player.template.isShowBottomArea) {
+                this.player.comment.showInner();
+                this.player.danmaku.showInnerDanBox();
+                this.player.comment.commentInput.focus();
+                this.player.bottomArea.toggle();
+            }
             this.player.resize();
         });
         this.player.events.on('webfullscreen_cancel', () => {
-            this.player.bottomArea.toggle();
-            this.player.comment.hideInner();
-            this.player.danmaku.hideInnerDanBox();
+            if (this.player.template.isShowBottomArea) {
+                this.player.bottomArea.toggle();
+                this.player.comment.hideInner();
+                this.player.danmaku.hideInnerDanBox();
+            }
             this.player.resize();
             utils.setScrollPosition(this.lastScrollPosition);
         });
@@ -22,13 +27,18 @@ class FullScreen {
             this.player.resize();
             if (this.isFullScreen('browser')) {
                 this.player.events.trigger('fullscreen');
-                this.player.danmaku.showInnerDanBox();
-                this.player.comment.showInner();
+                if (this.player.template.isShowBottomArea) {
+                    this.player.danmaku.showInnerDanBox();
+                    this.player.comment.showInner();
+                    this.player.comment.commentInput.focus();
+                }
             } else {
                 utils.setScrollPosition(this.lastScrollPosition);
                 this.player.events.trigger('fullscreen_cancel');
-                this.player.danmaku.hideInnerDanBox();
-                this.player.comment.hideInner();
+                if (this.player.template.isShowBottomArea) {
+                    this.player.danmaku.hideInnerDanBox();
+                    this.player.comment.hideInner();
+                }
                 // 由全屏切换为网页全屏
                 if (!this.isFullScreen('web')) {
                     this.player.template.controller.classList.remove('dplayer-controller-comment-fullscreen');
@@ -112,7 +122,6 @@ class FullScreen {
         }
 
         this.player.template.controller.classList.add('dplayer-controller-comment-fullscreen');
-        this.player.comment.commentInput.focus();
     }
 
     cancel(type = 'browser') {

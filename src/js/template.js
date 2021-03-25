@@ -8,6 +8,8 @@ class Template {
         this.options = options.options;
         this.index = options.index;
         this.tran = options.tran;
+        this.isShowBottomArea = this.options.isShowBottomArea;
+        this.subContent = this.options.subContent;
         this.init();
     }
 
@@ -19,6 +21,8 @@ class Template {
             tran: this.tran,
             icons: Icons,
             mobile: utils.isMobile,
+            subContent: this.subContent,
+            isShowBottomArea: this.isShowBottomArea,
             video: {
                 current: true,
                 pic: this.options.video.pic,
@@ -102,6 +106,7 @@ class Template {
         this.bottomArea = this.container.querySelector('.dplayer-video-bottom-area');
         this.bottomAreaRight = this.container.querySelector('.dplayer-video-bottom-area .dplayer-video-bottom-area-right');
         this.bottomAreaLeft = this.container.querySelector('.dplayer-video-bottom-area .dplayer-video-bottom-area-left');
+        this.bottomAreaLeftInfo = this.container.querySelector('.dplayer-video-bottom-area .dplayer-video-bottom-area-left-info');
     }
 }
 

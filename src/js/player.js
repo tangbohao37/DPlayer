@@ -1,5 +1,4 @@
 import Promise from 'promise-polyfill';
-
 import utils from './utils';
 import handleOption from './options';
 import i18n from './i18n';
@@ -81,7 +80,7 @@ class DPlayer {
 
         this.controller = new Controller(this);
 
-        if (this.options.danmaku) {
+        if (this.options.isShowBottomArea && this.options.danmaku) {
             this.danmaku = new Danmaku({
                 template: this.template,
                 container: this.template.danmaku,
@@ -117,6 +116,8 @@ class DPlayer {
             });
 
             this.comment = new Comment(this);
+        } else {
+            this.template.danmakuLoading.style.display = 'none';
         }
 
         this.setting = new Setting(this);
@@ -286,6 +287,12 @@ class DPlayer {
             this.play();
         } else {
             this.pause();
+        }
+    }
+
+    setSubContent(text) {
+        if (text) {
+            this.template.bottomAreaLeftInfo.innerHTML = text;
         }
     }
 
