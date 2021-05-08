@@ -69,13 +69,17 @@ class Comment {
     showInner() {
         // 删除底部区域dom
         const dom = this.player.template.bottomAreaRight.querySelector('.dplayer-comment-box');
-        this.player.template.bottomAreaRight.removeChild(dom);
+        if (this.player.template.bottomAreaRight.contains(dom)) {
+            this.player.template.bottomAreaRight.removeChild(dom);
+        }
         this.commentInnerBox.insertBefore(this.commentEle, this.commentInnerBox.getElementsByTagName('div')[0]);
     }
 
     hideInner() {
         const dom = this.commentInnerBox.querySelector('.dplayer-comment-box');
-        this.commentInnerBox.removeChild(dom);
+        if (this.commentInnerBox.contains(dom)) {
+            this.commentInnerBox.removeChild(dom);
+        }
         this.player.template.bottomAreaRight.insertBefore(this.commentEle, this.player.template.bottomAreaRight.getElementsByTagName('div')[0]);
     }
 

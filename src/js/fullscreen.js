@@ -24,6 +24,7 @@ class FullScreen {
         });
 
         const fullscreenchange = () => {
+            // chrome 全屏改变事件
             this.player.resize();
             if (this.isFullScreen('browser')) {
                 this.player.events.trigger('fullscreen');
@@ -31,6 +32,7 @@ class FullScreen {
                     this.player.danmaku.showInnerDanBox();
                     this.player.comment.showInner();
                     this.player.comment.commentInput.focus();
+                    this.player.bottomArea.hide();
                 }
             } else {
                 utils.setScrollPosition(this.lastScrollPosition);
@@ -38,6 +40,7 @@ class FullScreen {
                 if (this.player.template.isShowBottomArea) {
                     this.player.danmaku.hideInnerDanBox();
                     this.player.comment.hideInner();
+                    this.player.bottomArea.show();
                 }
                 // 由全屏切换为网页全屏
                 if (!this.isFullScreen('web')) {
@@ -46,6 +49,7 @@ class FullScreen {
             }
         };
         const docfullscreenchange = () => {
+            // 文档触发全屏改变事件
             const fullEle = document.fullscreenElement || document.mozFullScreenElement || document.msFullscreenElement;
             if (fullEle && fullEle !== this.player.container) {
                 return;
@@ -85,13 +89,14 @@ class FullScreen {
         }
     }
 
+    // 全屏切换
     request(type = 'browser') {
+        // 判断是否有已开启的其他全屏
         const anotherType = type === 'browser' ? 'web' : 'browser';
         const anotherTypeOn = this.isFullScreen(anotherType); // 是否有 web/browser全屏开启
         if (!anotherTypeOn) {
             this.lastScrollPosition = utils.getScrollPosition();
         }
-
         switch (type) {
             case 'browser':
                 this.player.controller.hide();

@@ -1,3 +1,4 @@
+<!-- 模板入口 -->
 <div class="dplayer-main-container">
 {{ include './player.art' }}
 </div>
