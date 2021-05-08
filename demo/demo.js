@@ -60,6 +60,7 @@ function initPlayers() {
         preload: 'none',
         subContent:"123123正在观看",
         isShowBottomArea:true,
+        // loop:true,
         screenshot: true,
         top:"<div id='test' style='display: flex;flex: 1;font-size:40px; color:#fff' onclick='fun()'>这里是顶部区域</div>",
         live:false,

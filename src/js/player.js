@@ -80,6 +80,7 @@ class DPlayer {
 
         this.controller = new Controller(this);
 
+        // 如果需要显示底部区域 且 有弹幕配置
         if (this.options.isShowBottomArea && this.options.danmaku) {
             this.danmaku = new Danmaku({
                 template: this.template,
@@ -96,7 +97,9 @@ class DPlayer {
                     }, 0);
                 },
                 error: (msg) => {
-                    this.notice(msg);
+                    // 弹幕拉取失败
+                    console.warn(msg);
+                    // this.notice(msg);
                 },
                 apiBackend: this.options.apiBackend,
                 borderColor: this.options.theme,
@@ -161,15 +164,17 @@ class DPlayer {
     /**
      * Seek video
      */
-    seek(time) {
+    seek(time, showNotic = true) {
         time = Math.max(time, 0);
         if (this.video.duration) {
             time = Math.min(time, this.video.duration);
         }
-        if (this.video.currentTime < time) {
-            this.notice(`${this.tran('FF')} ${(time - this.video.currentTime).toFixed(0)} ${this.tran('s')}`);
-        } else if (this.video.currentTime > time) {
-            this.notice(`${this.tran('REW')} ${(this.video.currentTime - time).toFixed(0)} ${this.tran('s')}`);
+        if (showNotic) {
+            if (this.video.currentTime < time) {
+                this.notice(`${this.tran('FF')} ${(time - this.video.currentTime).toFixed(0)} ${this.tran('s')}`);
+            } else if (this.video.currentTime > time) {
+                this.notice(`${this.tran('REW')} ${(this.video.currentTime - time).toFixed(0)} ${this.tran('s')}`);
+            }
         }
 
         this.video.currentTime = time;
@@ -497,7 +502,7 @@ class DPlayer {
             if (!this.setting.loop) {
                 this.pause();
             } else {
-                this.seek(0);
+                this.seek(0, false);
                 this.play();
             }
             if (this.danmaku) {
