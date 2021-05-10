@@ -6,6 +6,7 @@ const devConfig = {
     mode: 'development',
     devtool: 'eval-source-map',
     devServer: {
+        port: 8800,
         compress: true,
         contentBase: path.resolve(__dirname, '..', 'demo'),
         clientLogLevel: 'debug',

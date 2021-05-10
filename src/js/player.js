@@ -119,7 +119,6 @@ class DPlayer {
             });
 
             this.comment = new Comment(this);
-        } else {
             this.template.danmakuLoading.style.display = 'none';
         }
 

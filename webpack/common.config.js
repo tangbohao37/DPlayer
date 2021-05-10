@@ -13,9 +13,7 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, '..', 'dist'),
         filename: '[name].js',
-        library: '[name]',
-        libraryTarget: 'umd',
-        libraryExport: 'default',
+        library: { type: 'umd', name: '[name]', export: 'default' },
         umdNamedDefine: true,
         publicPath: '/',
     },

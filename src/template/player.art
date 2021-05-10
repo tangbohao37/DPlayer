@@ -2,13 +2,6 @@
 <div class="dplayer-video-wrap">
     <!--  主视频区域 -->
     {{ include './video.art' video }}
-    {{ if options.logo }}
-    <!--  左上logo区 -->
-    <div class="dplayer-logo">
-        <!--  图片最大50px*50px -->
-        <img src="{{ options.logo }}">
-    </div>
-    {{ /if }}
     <div class="dplayer-danmaku"{{ if options.danmaku && options.danmaku.bottom }} style="margin-bottom:{{ options.danmaku.bottom }}"{{ /if }}>
         <div class="dplayer-danmaku-item dplayer-danmaku-item--demo"></div>
     </div>

@@ -9,7 +9,6 @@ class FullScreen {
                 this.player.comment.showInner();
                 this.player.danmaku.showInnerDanBox();
                 this.player.comment.commentInput.focus();
-                this.player.bottomArea.toggle();
             }
             this.player.resize();
         });
@@ -24,9 +23,11 @@ class FullScreen {
         });
 
         const fullscreenchange = () => {
-            // chrome 全屏改变事件
+            console.log('触发 fullscreenchange');
+            // 全屏改变事件
             this.player.resize();
             if (this.isFullScreen('browser')) {
+                // 当前是浏览器全屏
                 this.player.events.trigger('fullscreen');
                 if (this.player.template.isShowBottomArea) {
                     this.player.danmaku.showInnerDanBox();
@@ -35,20 +36,24 @@ class FullScreen {
                     this.player.bottomArea.hide();
                 }
             } else {
+                //  取消全屏
                 utils.setScrollPosition(this.lastScrollPosition);
+                // 触发外部事件
                 this.player.events.trigger('fullscreen_cancel');
-                if (this.player.template.isShowBottomArea) {
-                    this.player.danmaku.hideInnerDanBox();
-                    this.player.comment.hideInner();
-                    this.player.bottomArea.show();
-                }
-                // 由全屏切换为网页全屏
+
+                // 由全屏切换为普通网页模式
                 if (!this.isFullScreen('web')) {
                     this.player.template.controller.classList.remove('dplayer-controller-comment-fullscreen');
+                    if (this.player.template.isShowBottomArea) {
+                        this.player.bottomArea.toggle();
+                        this.player.comment.hideInner();
+                        this.player.danmaku.hideInnerDanBox();
+                    }
                 }
             }
         };
         const docfullscreenchange = () => {
+            console.log('触发：docfullscreenchange');
             // 文档触发全屏改变事件
             const fullEle = document.fullscreenElement || document.mozFullScreenElement || document.msFullscreenElement;
             if (fullEle && fullEle !== this.player.container) {
@@ -118,6 +123,7 @@ class FullScreen {
             case 'web':
                 this.player.container.classList.add('dplayer-fulled');
                 document.body.classList.add('dplayer-web-fullscreen-fix');
+                this.player.bottomArea.hide();
                 this.player.events.trigger('webfullscreen');
                 break;
         }
@@ -157,8 +163,10 @@ class FullScreen {
 
     toggle(type = 'browser') {
         if (this.isFullScreen(type)) {
+            // 是目标全屏状态 则取消全屏
             this.cancel(type);
         } else {
+            // 非目标全屏状态 则执行全屏
             this.request(type);
         }
     }
