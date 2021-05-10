@@ -81,7 +81,7 @@ class DPlayer {
         this.controller = new Controller(this);
 
         // 如果需要显示底部区域 且 有弹幕配置
-        if (this.options.isShowBottomArea && this.options.danmaku) {
+        if (this.options.danmaku) {
             this.danmaku = new Danmaku({
                 template: this.template,
                 container: this.template.danmaku,
@@ -338,6 +338,13 @@ class DPlayer {
     }
 
     initMSE(video, type) {
+        // 如果目标流获取失败是否轮训
+        this.onStreamErrorInterval = this.options.onStreamErrorInterval;
+        // 如果目标流中断是否轮询
+        this.onStreamEndInterval = this.options.onStreamEndInterval;
+        // 轮询间隔
+        this.timeout = this.options.timeout;
+
         this.type = type;
         if (this.options.video.customType && this.options.video.customType[type]) {
             if (Object.prototype.toString.call(this.options.video.customType[type]) === '[object Function]') {
@@ -397,9 +404,10 @@ class DPlayer {
                                 this.options.pluginOptions.flv.config
                             );
                             this.plugins.flvjs = flvPlayer;
+                            new FlvListener(flvPlayer, this, video.src, type);
+                            // 为什么挂载之后url变了
                             flvPlayer.attachMediaElement(video);
                             flvPlayer.load();
-                            new FlvListener(flvPlayer, this);
                             this.events.on('destroy', () => {
                                 flvPlayer.unload();
                                 flvPlayer.detachMediaElement();

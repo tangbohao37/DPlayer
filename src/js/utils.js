@@ -1,3 +1,4 @@
+import Promise from 'promise-polyfill';
 const isMobile = /mobile/i.test(window.navigator.userAgent);
 
 const utils = {
@@ -130,6 +131,21 @@ const utils = {
             default:
                 return 'right';
         }
+    },
+    // 检测流是否可用  用于轮训中
+    checkStream(url, timeout = 2000) {
+        const xhr = new XMLHttpRequest();
+        return new Promise((resolve, reject) => {
+            xhr.open('get', url);
+            xhr.send();
+            xhr.timeout = timeout;
+            xhr.onreadystatechange = () => {
+                if (xhr.readyState === 2 && xhr.status === 200) {
+                    resolve(xhr);
+                }
+                reject(xhr);
+            };
+        });
     },
 };
 

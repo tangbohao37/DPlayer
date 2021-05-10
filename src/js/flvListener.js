@@ -1,11 +1,17 @@
+import utils from './utils';
 class FlvListener {
-    constructor(flvPlayer, player) {
+    constructor(flvPlayer, player, videoSrc, type) {
         this.flvPlayer = flvPlayer;
         this.player = player;
+        this.onStreamErrorInterval = player.onStreamErrorInterval;
+        this.onStreamEndInterval = player.onStreamEndInterval;
+        this.type = type;
         if (!window.flvjs) {
             this.notice("Error: Can't find flvjs.");
             return;
         }
+        this.intervalTimeOut = this.player.timeout;
+        this.videoSrc = videoSrc;
         this.flvjs = window.flvjs;
         this.flvjs.LoggingControl.enableVerbose = false;
         this.flvjs.LoggingControl.forceGlobalTag = false;
@@ -21,6 +27,10 @@ class FlvListener {
     initEventListener() {
         // 网络或视频错误
         this.flvPlayer.on(this.flvjs.Events.ERROR, (type, detail, code) => {
+            if (this.onStreamErrorInterval) {
+                // 流拉取失败 需要轮训重新拉取
+                this.intervalSourceStream();
+            }
             this.player.events.trigger('error', { type, detail, resCode: code });
         });
         // 拉取流信息
@@ -44,7 +54,7 @@ class FlvListener {
         this.flvjs.LoggingControl.addLogListener((type, str) => {
             let status = '';
             if (str.includes('onSourceOpen')) {
-                // 初始化正常，正在拉流
+                // 初始化正常，正在尝试拉流
                 status = 'sourceOpened';
             }
             if (str.includes('onSourceClose')) {
@@ -54,9 +64,35 @@ class FlvListener {
             if (str.includes('onSourceEnded')) {
                 // C端停止推流/断流
                 status = 'sourceEnd';
+                if (this.onStreamEndInterval) {
+                    // 流拉取失败 需要轮训重新拉取
+                    this.intervalSourceStream();
+                }
             }
+            // 网络流状态改变事件
             status && this.player.events.trigger('on_sources_tatus_change', status);
         });
+    }
+    intervalSourceStream() {
+        const url = this.videoSrc;
+        const intervalCheck = setInterval(() => {
+            utils.checkStream(url).then(() => {
+                // 请求连通
+                clearInterval(intervalCheck);
+                if (this.flvPlayer) {
+                    // 连接成功 重新创建实例
+                    this.flvPlayer.pause();
+                    this.flvPlayer.unload();
+                    this.flvPlayer.detachMediaElement();
+                    this.flvPlayer.destroy();
+                    this.flvPlayer = null;
+                    this.flvPlayer = window.flvjs.createPlayer({ type: this.type, url: url, isLive: this.player.options.live }, this.player.options.pluginOptions.flv.config);
+                    this.flvPlayer.attachMediaElement(this.player.template.video);
+                    this.flvPlayer.load();
+                    this.flvPlayer.play();
+                }
+            });
+        }, this.intervalTimeOut);
     }
 }
 

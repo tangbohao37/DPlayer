@@ -63,11 +63,17 @@ function initPlayers() {
         screenshot: true,
         top:"<div id='test' style='display: flex;flex: 1;font-size:40px; color:#fff' onclick='fun()'>这里是顶部区域</div>",
         live:false,
+        // 如果目标流获取失败是否轮训
+        onStreamErrorInterval:true,
+        // 如果目标流中断是否轮询
+        onStreamEndInterval:true,
+        // 轮训时间配置
+        timeout:2000,
         video: {
             quality: [{
                 name: 'HD',
-                url: 'https://s-sh-17-dplayercdn.oss.dogecdn.com/hikarunara.m3u8',
-                type: 'hls'
+                url: 'https://tactivity-play.wiiqq.com/live/tactivity-push_20d396a52a0a4ba281050d29043abd67_customhd.flv?txSecret=643c60bd30973ce95daec581b7da256e&txTime=60A644E2',
+                type: 'flv'
             }, {
                 name: 'SD',
                 url: 'https://api.dogecloud.com/player/get.mp4?vcode=5ac682e6f8231991&userId=17&ext=.mp4',
@@ -82,15 +88,15 @@ function initPlayers() {
         //     url: 'https://api.dogecloud.com/player/get.mp4?vcode=5ac682e6f8231991&userId=17&ext=.mp4',
         //     defaultQuality: 0,
         // },
-        subtitle: {
-            url: 'https://s-sh-17-dplayercdn.oss.dogecdn.com/hikarunara.vtt'
-        },
-        danmaku: {
-            id: '9E2E3368B56CDBB4',
-            api: 'https://api.prprpr.me/dplayer/',
-            bottm:"100px",
-            addition: ['https://s-sh-17-dplayercdn.oss.dogecdn.com/1678963.json']
-        }
+        // subtitle: {
+        //     url: 'https://s-sh-17-dplayercdn.oss.dogecdn.com/hikarunara.vtt'
+        // },
+        // danmaku: {
+        //     id: '9E2E3368B56CDBB4',
+        //     api: 'https://api.prprpr.me/dplayer/',
+        //     bottm:"100px",
+        //     addition: ['https://s-sh-17-dplayercdn.oss.dogecdn.com/1678963.json']
+        // }
     });
 
     window.dp1.setSubContent("8人正在观看")
@@ -138,16 +144,16 @@ function initPlayers() {
     //     ]
     // });
     dp1.on('error',(e)=>{
-      console.log(e)
+      console.log('error',e)
     })
     dp1.on('on_sources_tatus_change',(e)=>{
-      console.log(e)
+      console.log('on_sources_tatus_change',e)
     })
     dp1.on('on_reconnect',(e)=>{
-      console.log(e)
+      console.log('on_reconnect',e)
     })
     dp1.on('on_connected',(e)=>{
-      console.log(e)
+      console.log('on_connected',e)
     })
 
     const events = [
