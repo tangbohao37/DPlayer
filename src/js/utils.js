@@ -133,7 +133,7 @@ const utils = {
         }
     },
     // 检测流是否可用  用于轮训中
-    checkStream(url, timeout = 2000) {
+    checkStream(url, timeout = 3000) {
         const xhr = new XMLHttpRequest();
         return new Promise((resolve, reject) => {
             xhr.open('get', url);

@@ -21,6 +21,7 @@ import InfoPanel from './info-panel';
 import tplVideo from '../template/video.art';
 import FlvListener from './flvListener';
 import BottomArea from './bottomArea';
+import HlsListener from './hlsListener';
 
 let index = 0;
 const instances = [];
@@ -378,6 +379,7 @@ class DPlayer {
                             const hls = new window.Hls(options);
                             this.plugins.hls = hls;
                             hls.loadSource(video.src);
+                            new HlsListener(hls, this, video.src);
                             hls.attachMedia(video);
                             this.events.on('destroy', () => {
                                 hls.destroy();
@@ -404,7 +406,7 @@ class DPlayer {
                                 this.options.pluginOptions.flv.config
                             );
                             this.plugins.flvjs = flvPlayer;
-                            new FlvListener(flvPlayer, this, video.src, type);
+                            new FlvListener(flvPlayer, this, video.src);
                             // 为什么挂载之后url变了
                             flvPlayer.attachMediaElement(video);
                             flvPlayer.load();

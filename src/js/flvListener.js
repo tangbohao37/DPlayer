@@ -1,11 +1,10 @@
 import utils from './utils';
 class FlvListener {
-    constructor(flvPlayer, player, videoSrc, type) {
+    constructor(flvPlayer, player, videoSrc) {
         this.flvPlayer = flvPlayer;
         this.player = player;
         this.onStreamErrorInterval = player.onStreamErrorInterval;
         this.onStreamEndInterval = player.onStreamEndInterval;
-        this.type = type;
         if (!window.flvjs) {
             this.notice("Error: Can't find flvjs.");
             return;
@@ -86,7 +85,7 @@ class FlvListener {
                     this.flvPlayer.detachMediaElement();
                     this.flvPlayer.destroy();
                     this.flvPlayer = null;
-                    this.flvPlayer = window.flvjs.createPlayer({ type: this.type, url: url, isLive: this.player.options.live }, this.player.options.pluginOptions.flv.config);
+                    this.flvPlayer = window.flvjs.createPlayer({ type: 'flv', url: url, isLive: this.player.options.live }, this.player.options.pluginOptions.flv.config);
                     this.flvPlayer.attachMediaElement(this.player.template.video);
                     this.flvPlayer.load();
                     this.flvPlayer.play();

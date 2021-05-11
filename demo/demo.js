@@ -72,8 +72,9 @@ function initPlayers() {
         video: {
             quality: [{
                 name: 'HD',
-                url: 'https://tactivity-play.wiiqq.com/live/tactivity-push_20d396a52a0a4ba281050d29043abd67_customhd.flv?txSecret=643c60bd30973ce95daec581b7da256e&txTime=60A644E2',
-                type: 'flv'
+                // url: 'https://tactivity-play.wiiqq.com/live/tactivity-push_20d396a52a0a4ba281050d29043abd67_customhd.flv?txSecret=643c60bd30973ce95daec581b7da256e&txTime=60A644E2',
+                url: 'https://tactivity-play.wiiqq.com/live/tactivity-push_47dc616ae95b478eb71ac4d40124e82e_customhd.m3u8?txSecret=b3a002b90813036e4f2e7a768ef356a6&txTime=60A7151A',
+                type: 'hls'
             }, {
                 name: 'SD',
                 url: 'https://api.dogecloud.com/player/get.mp4?vcode=5ac682e6f8231991&userId=17&ext=.mp4',
