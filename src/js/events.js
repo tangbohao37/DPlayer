@@ -26,9 +26,9 @@ class Events {
             'timeupdate',
             'volumechange',
             'waiting',
-            'on_sources_tatus_change',
-            'on_reconnect', // 网络异常，已重新连接
-            'on_connected', // 成功拉取数据元信息/成功拉到流
+            'disconnect', // 网络异常 未拉取到数据
+            'reconnect', // 网络异常，已重新连接
+            'connected', // 成功拉取数据元信息/成功拉到流
         ];
         this.playerEvents = [
             'screenshot',

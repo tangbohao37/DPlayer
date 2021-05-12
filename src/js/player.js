@@ -373,56 +373,12 @@ class DPlayer {
             switch (this.type) {
                 // https://github.com/video-dev/hls.js
                 case 'hls':
-                    if (window.Hls) {
-                        if (window.Hls.isSupported()) {
-                            const options = this.options.pluginOptions.hls;
-                            const hls = new window.Hls(options);
-                            this.plugins.hls = hls;
-                            hls.loadSource(video.src);
-                            new HlsListener(hls, this, video.src);
-                            hls.attachMedia(video);
-                            this.events.on('destroy', () => {
-                                hls.destroy();
-                                delete this.plugins.hls;
-                            });
-                        } else {
-                            this.notice('Error: Hls is not supported.');
-                        }
-                    } else {
-                        this.notice("Error: Can't find Hls.");
-                    }
+                    this.createHlsInstance(video.src, video);
                     break;
 
                 // https://github.com/Bilibili/flv.js
                 case 'flv':
-                    if (window.flvjs) {
-                        if (window.flvjs.isSupported()) {
-                            const flvPlayer = window.flvjs.createPlayer(
-                                Object.assign(this.options.pluginOptions.flv.mediaDataSource || {}, {
-                                    type: 'flv',
-                                    url: video.src,
-                                    isLive: this.options.live,
-                                }),
-                                this.options.pluginOptions.flv.config
-                            );
-                            this.plugins.flvjs = flvPlayer;
-                            new FlvListener(flvPlayer, this, video.src);
-                            // 为什么挂载之后url变了
-                            flvPlayer.attachMediaElement(video);
-                            flvPlayer.load();
-                            this.events.on('destroy', () => {
-                                flvPlayer.unload();
-                                flvPlayer.detachMediaElement();
-                                flvPlayer.destroy();
-                                flvPlayer.removeLogListener();
-                                delete this.plugins.flvjs;
-                            });
-                        } else {
-                            this.notice('Error: flvjs is not supported.');
-                        }
-                    } else {
-                        this.notice("Error: Can't find flvjs.");
-                    }
+                    this.createFlvInstance(video.src, video);
                     break;
 
                 // https://github.com/Dash-Industry-Forum/dash.js
@@ -579,6 +535,7 @@ class DPlayer {
         // 生成新的 video 元素
         const videoEle = new DOMParser().parseFromString(videoHTML, 'text/html').body.firstChild;
         this.template.videoWrap.insertBefore(videoEle, this.template.videoWrap.getElementsByTagName('div')[0]);
+        // 替换原对象
         this.prevVideo = this.video;
         this.video = videoEle;
         this.initVideo(this.video, this.quality.type || this.options.video.type);
@@ -643,6 +600,68 @@ class DPlayer {
         this.video.src = '';
         this.container.innerHTML = '';
         this.events.trigger('destroy');
+    }
+
+    createFlvInstance(src, videoElement) {
+        const Listener = FlvListener;
+        if (window.flvjs) {
+            if (window.flvjs.isSupported()) {
+                const flvPlayer = window.flvjs.createPlayer(
+                    Object.assign(this.options.pluginOptions.flv.mediaDataSource || {}, {
+                        type: 'flv',
+                        url: src,
+                        isLive: this.options.live,
+                    }),
+                    this.options.pluginOptions.flv.config
+                );
+                this.plugins.flvjs = flvPlayer;
+                // 创建独立实例监听
+                const FlvListener = new Listener(flvPlayer, this, src);
+                FlvListener.initEventListener();
+                flvPlayer.attachMediaElement(videoElement);
+                flvPlayer.load();
+
+                this.events.on('destroy', () => {
+                    FlvListener.offEventListener();
+                    flvPlayer.unload();
+                    flvPlayer.detachMediaElement();
+                    flvPlayer.destroy();
+                    flvPlayer.removeLogListener();
+                    delete this.plugins.flvjs;
+                });
+            } else {
+                this.notice('Error: flvjs is not supported.');
+            }
+        } else {
+            this.notice("Error: Can't find flvjs.");
+        }
+    }
+
+    createHlsInstance(src, videoElement) {
+        const Listener = HlsListener;
+        // TODO:为什么内层获取 HlsListener 是 undefined
+        if (window.Hls) {
+            if (window.Hls.isSupported()) {
+                console.log(HlsListener);
+                const options = this.options.pluginOptions.hls;
+                const hlsInstance = new window.Hls(options);
+                this.plugins.hls = hlsInstance;
+                hlsInstance.loadSource(src);
+                const HlsListener = new Listener(hlsInstance, this, src);
+                HlsListener.initEventListener();
+                hlsInstance.attachMedia(videoElement);
+
+                this.events.on('destroy', () => {
+                    HlsListener.offEventListener();
+                    hlsInstance.destroy();
+                    delete this.plugins.hls;
+                });
+            } else {
+                this.notice('Error: Hls is not supported.');
+            }
+        } else {
+            this.notice("Error: Can't find Hls.");
+        }
     }
 
     static get version() {

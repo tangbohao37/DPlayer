@@ -11,6 +11,7 @@ class FlvListener {
         }
         this.intervalTimeOut = this.player.timeout;
         this.videoSrc = videoSrc;
+        this.isIntervaling = false;
         this.flvjs = window.flvjs;
         this.flvjs.LoggingControl.enableVerbose = false;
         this.flvjs.LoggingControl.forceGlobalTag = false;
@@ -21,75 +22,83 @@ class FlvListener {
         this.flvjs.LoggingControl.enableInfo = false;
         this.flvjs.LoggingControl.enableWarn = false;
         this.flvjs.LoggingControl.enableError = false;
-        this.initEventListener();
     }
     initEventListener() {
         // 网络或视频错误
-        this.flvPlayer.on(this.flvjs.Events.ERROR, (type, detail, code) => {
-            if (this.onStreamErrorInterval) {
-                // 流拉取失败 需要轮训重新拉取
-                this.intervalSourceStream();
-            }
-            this.player.events.trigger('error', { type, detail, resCode: code });
-        });
-        // 拉取流信息
-        this.flvPlayer.on(this.flvjs.Events.MEDIA_INFO, (...e) => {
-            this.player.events.trigger('loadeddata', e);
-        });
-        // 成功拉取数据元信息/成功拉到流
-        this.flvPlayer.on(this.flvjs.Events.METADATA_ARRIVED, (...e) => {
-            console.log('成功拉取数据元信息', e);
-            this.player.events.trigger('on_connected', e);
-        });
-        // 网络异常，已重新连接
-        this.flvPlayer.on(this.flvjs.Events.RECOVERED_EARLY_EOF, (...e) => {
-            this.player.events.trigger('on_reconnect', e);
-        });
-        // 断流/加载完成
-        this.flvPlayer.on(this.flvjs.Events.LOADING_COMPLETE, (...e) => {
-            this.player.events.trigger('canplaythrough', e);
-        });
-        // 断流事件
-        this.flvjs.LoggingControl.addLogListener((type, str) => {
-            let status = '';
-            if (str.includes('onSourceOpen')) {
-                // 初始化正常，正在尝试拉流
-                status = 'sourceOpened';
-            }
-            if (str.includes('onSourceClose')) {
-                // 服务器关闭流
-                status = 'sourceClose';
-            }
-            if (str.includes('onSourceEnded')) {
-                // C端停止推流/断流
-                status = 'sourceEnd';
-                if (this.onStreamEndInterval) {
+        this.flvPlayer.on(this.flvjs.Events.ERROR, (type, detail, response) => {
+            // 网络异常 未拉取到数据
+            console.log('网络或视频错误', type, detail, response);
+            if (type === this.flvjs.ErrorTypes.MEDIA_ERROR && response.code === '404') {
+                this.player.events.trigger('disconnect');
+                if (this.onStreamErrorInterval && !this.isIntervaling) {
                     // 流拉取失败 需要轮训重新拉取
                     this.intervalSourceStream();
                 }
             }
-            // 网络流状态改变事件
-            status && this.player.events.trigger('on_sources_tatus_change', status);
+        });
+        // 拉取流信息
+        this.flvPlayer.on(this.flvjs.Events.MEDIA_INFO, (...e) => {
+            console.log('拉取流信息', e);
+            // this.player.events.trigger('loadeddata', e);
+        });
+        // 成功拉取数据元信息/成功拉到流
+        this.flvPlayer.on(this.flvjs.Events.METADATA_ARRIVED, (...e) => {
+            console.log('成功拉取数据元信息', e);
+            this.player.events.trigger('connected', e);
+        });
+        // 网络异常，已重新连接
+        this.flvPlayer.on(this.flvjs.Events.RECOVERED_EARLY_EOF, (...e) => {
+            console.log('网络异常，已重新连接', e);
+            this.player.events.trigger('reconnect', e);
+        });
+        // 断流/加载完成
+        this.flvPlayer.on(this.flvjs.Events.LOADING_COMPLETE, (...e) => {
+            console.log('断流/加载完成', e);
+            // this.player.events.trigger('canplaythrough', e);
+        });
+        // log 监听
+        this.flvjs.LoggingControl.addLogListener((type, str) => {
+            if (str.includes('onSourceOpen')) {
+                // 初始化正常，正在尝试拉流
+                console.log('flv初始化正常，正在尝试拉流');
+            }
+            if (str.includes('onSourceClose')) {
+                // 服务器关闭流
+                console.log('服务器关闭流');
+            }
+            if (str.includes('onSourceEnded')) {
+                // C端停止推流/断流
+                console.log('C端停止推流/断流');
+                if (this.onStreamEndInterval && !this.isIntervaling) {
+                    // 流拉取失败 需要轮训重新拉取
+                    this.intervalSourceStream();
+                }
+            }
+        });
+    }
+    offEventListener() {
+        Object.keys(this.flvjs.Events).forEach((e) => {
+            this.hlsPlayer.off(this.flvjs.Events[e]);
         });
     }
     intervalSourceStream() {
-        const url = this.videoSrc;
+        const src = this.videoSrc;
+        this.isIntervaling = true;
         const intervalCheck = setInterval(() => {
-            utils.checkStream(url).then(() => {
+            utils.checkStream(src).then(() => {
                 // 请求连通
                 clearInterval(intervalCheck);
+                this.isIntervaling = false;
                 if (this.flvPlayer) {
-                    // 连接成功 重新创建实例
-                    this.flvPlayer.pause();
-                    this.flvPlayer.unload();
+                    //  重新创建实例
+                    this.offEventListener();
                     this.flvPlayer.detachMediaElement();
                     this.flvPlayer.destroy();
                     this.flvPlayer = null;
-                    this.flvPlayer = window.flvjs.createPlayer({ type: 'flv', url: url, isLive: this.player.options.live }, this.player.options.pluginOptions.flv.config);
-                    this.flvPlayer.attachMediaElement(this.player.template.video);
-                    this.flvPlayer.load();
-                    this.flvPlayer.play();
+                    this.player.createFlvInstance(src, this.player.template.video);
+                    // this.flvPlayer = window.flvjs.createPlayer({ type: 'flv', url: url, isLive: this.player.options.live }, this.player.options.pluginOptions.flv.config);
                 }
+                this.player.events.trigger('reconnect');
             });
         }, this.intervalTimeOut);
     }

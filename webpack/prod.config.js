@@ -3,9 +3,9 @@ const { merge } = require('webpack-merge');
 
 const prodConfig = {
     mode: 'production',
-    output: {
-        filename: '[name].min.js',
-    },
+    // output: {
+    //     filename: '[name].min.js',
+    // },
 };
 
 module.exports = merge(baseConfig, prodConfig);

@@ -4,8 +4,8 @@ class HlsListener {
     constructor(hlsPlayer, player, videoSrc) {
         this.hlsPlayer = hlsPlayer;
         this.player = player;
-        this.onStreamErrorInterval = player.onStreamErrorInterval;
-        this.onStreamEndInterval = player.onStreamEndInterval;
+        this.onStreamErrorInterval = player.onStreamErrorInterval; // 如果目标流获取失败是否轮训
+        this.onStreamEndInterval = player.onStreamEndInterval; // 如果目标流中断是否轮询
         if (!window.Hls) {
             this.notice("Error: Can't find hls.js.");
             return;
@@ -13,6 +13,7 @@ class HlsListener {
         this.intervalTimeOut = this.player.timeout;
         this.videoSrc = videoSrc;
         this.hlsjs = window.Hls;
+        this.isIntervaling = false;
         this.networkErrorList = [
             // 网络连接超时
             this.hlsjs.ErrorDetails.MANIFEST_LOAD_TIMEOUT,
@@ -45,44 +46,68 @@ class HlsListener {
             // 网络连接超时
             this.hlsjs.ErrorDetails.MANIFEST_LOAD_TIMEOUT,
         ];
-        this.initEventListener();
     }
 
     initEventListener() {
+        // Object.keys(this.hlsjs.Events).forEach((e) => {
+        //     this.hlsPlayer.on(this.hlsjs.Events[e], console.info.bind(console));
+        // });
+        // 数据获取成功
+        this.hlsPlayer.once(this.hlsjs.Events.LEVEL_LOADED, (event, data) => {
+            this.player.events.trigger('connected', event, data);
+        });
         // 网络或视频错误
         this.hlsPlayer.on(this.hlsjs.Events.ERROR, (event, data) => {
-            console.log('触发事件：', event, data);
+            console.log('hls事件：', event, data);
+            // '网络错误'
             if (this.networkErrorList.includes(data.details)) {
                 console.log('网络错误');
+                // 停止拉取碎片
                 this.hlsPlayer.stopLoad();
-                this.intervalSourceStream();
-                this.player.events.trigger('error', { type: data.type, details: data.details });
+                this.player.events.trigger('disconnect');
+                if (this.onStreamEndInterval && !this.isIntervaling) {
+                    // 开始轮询
+                    this.intervalSourceStream();
+                }
             }
             // 媒体错误
             if (this.mediaErrorList.includes(data.details)) {
-                console.log('媒体错误');
-                this.hlsPlayer.recoverMediaError();
+                const e = this.hlsPlayer.recoverMediaError();
+                console.log('媒体错误', e);
             }
             // 中途断流事件
             if (this.endStream.includes(data.details)) {
                 console.log('中途断流');
-                this.player.events.trigger('on_sources_tatus_change', 'sourceEnd');
+                this.hlsPlayer.stopLoad();
+                this.player.events.trigger('disconnect');
+                if (this.onStreamEndInterval && !this.isIntervaling) {
+                    this.intervalSourceStream();
+                }
             }
         });
     }
+    offEventListener() {
+        Object.keys(this.hlsjs.Events).forEach((e) => {
+            this.hlsPlayer.off(this.hlsjs.Events[e]);
+        });
+    }
     intervalSourceStream() {
-        const url = this.videoSrc;
+        const src = this.videoSrc;
+        this.isIntervaling = true;
         const intervalCheck = setInterval(() => {
-            utils.checkStream(url).then(() => {
-                console.log('开始轮询');
+            utils.checkStream(src).then(() => {
                 // 请求连通
                 clearInterval(intervalCheck);
+                this.isIntervaling = false;
                 if (this.hlsPlayer) {
-                    // 连接成功 重新连接
-                    this.hlsPlayer.loadSource(this.videoSrc);
-                    this.hlsPlayer.startLoad();
-                    this.player.play();
+                    // 销毁实例
+                    this.offEventListener();
+                    this.hlsPlayer.detachMedia();
+                    this.hlsPlayer.destroy();
+                    // 重新创建实例
+                    this.player.createHlsInstance(src, this.player.template.video);
                 }
+                this.player.events.trigger('reconnect');
             });
         }, this.intervalTimeOut);
     }

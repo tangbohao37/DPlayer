@@ -147,14 +147,14 @@ function initPlayers() {
     dp1.on('error',(e)=>{
       console.log('error',e)
     })
-    dp1.on('on_sources_tatus_change',(e)=>{
+    dp1.on('sources_tatus_change',(e)=>{
       console.log('on_sources_tatus_change',e)
     })
-    dp1.on('on_reconnect',(e)=>{
-      console.log('on_reconnect',e)
+    dp1.on('reconnect',(e)=>{
+      console.log('reconnect',e)
     })
-    dp1.on('on_connected',(e)=>{
-      console.log('on_connected',e)
+    dp1.on('connected',(e)=>{
+      console.log('connected',e)
     })
 
     const events = [
