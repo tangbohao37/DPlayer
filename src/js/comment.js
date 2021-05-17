@@ -1,6 +1,6 @@
-import Icons from './icons';
+// import Icons from './icons';
 import utils from './utils';
-import tplComment from '../template/controller/comment.art';
+// import tplComment from '../template/controller/comment.art';
 
 class Comment {
     constructor(player) {
@@ -10,19 +10,19 @@ class Comment {
         this.initListener();
     }
 
-    initComment(type = null) {
-        const commentDom = tplComment({
-            icons: Icons,
-            tran: this.player.tran,
-        });
-        this.commentEle = new DOMParser().parseFromString(commentDom, 'text/html').body.firstChild;
-        if (type === 'inner') {
-            this.commentInnerBox.insertBefore(this.commentEle, this.commentInnerBox.getElementsByTagName('div')[0]);
-        }
-        if (type === 'bottom') {
-            this.player.template.bottomAreaRight.insertBefore(this.commentEle, this.player.template.bottomAreaRight.getElementsByTagName('div')[0]);
-        }
-    }
+    // initComment(type = null) {
+    //     const commentDom = tplComment({
+    //         icons: Icons,
+    //         tran: this.player.tran,
+    //     });
+    // this.commentEle = new DOMParser().parseFromString(commentDom, 'text/html').body.firstChild;
+    // if (type === 'inner') {
+    //     this.commentInnerBox.insertBefore(this.commentEle, this.commentInnerBox.getElementsByTagName('div')[0]);
+    // }
+    // if (type === 'bottom') {
+    //     this.player.template.bottomAreaRight.insertBefore(this.commentEle, this.player.template.bottomAreaRight.getElementsByTagName('div')[0]);
+    // }
+    // }
 
     initListener() {
         // this.player.template.mask.addEventListener('click', () => {
@@ -66,22 +66,22 @@ class Comment {
         this.commentInput.focus();
     }
 
-    showInner() {
-        // 删除底部区域dom
-        const dom = this.player.template.bottomAreaRight.querySelector('.dplayer-comment-box');
-        if (this.player.template.bottomAreaRight.contains(dom)) {
-            this.player.template.bottomAreaRight.removeChild(dom);
-        }
-        this.commentInnerBox.insertBefore(this.commentEle, this.commentInnerBox.getElementsByTagName('div')[0]);
-    }
+    // showInner() {
+    //     // 删除底部区域dom
+    //     const dom = this.player.template.bottomAreaRight.querySelector('.dplayer-comment-box');
+    //     if (this.player.template.bottomAreaRight.contains(dom)) {
+    //         this.player.template.bottomAreaRight.removeChild(dom);
+    //     }
+    //     this.commentInnerBox.insertBefore(this.commentEle, this.commentInnerBox.getElementsByTagName('div')[0]);
+    // }
 
-    hideInner() {
-        const dom = this.commentInnerBox.querySelector('.dplayer-comment-box');
-        if (this.commentInnerBox.contains(dom)) {
-            this.commentInnerBox.removeChild(dom);
-        }
-        this.player.template.bottomAreaRight.insertBefore(this.commentEle, this.player.template.bottomAreaRight.getElementsByTagName('div')[0]);
-    }
+    // hideInner() {
+    //     const dom = this.commentInnerBox.querySelector('.dplayer-comment-box');
+    //     if (this.commentInnerBox.contains(dom)) {
+    //         this.commentInnerBox.removeChild(dom);
+    //     }
+    //     this.player.template.bottomAreaRight.insertBefore(this.commentEle, this.player.template.bottomAreaRight.getElementsByTagName('div')[0]);
+    // }
 
     hide() {
         this.player.template.controller.classList.remove('dplayer-controller-comment');

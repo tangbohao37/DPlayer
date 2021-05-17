@@ -7,8 +7,8 @@ import full from '../assets/full.svg';
 import fullWeb from '../assets/full-web.svg';
 import setting from '../assets/setting.svg';
 import right from '../assets/right.svg';
-import comment from '../assets/comment.svg';
-import commentOff from '../assets/comment-off.svg';
+// import comment from '../assets/comment.svg';
+// import commentOff from '../assets/comment-off.svg';
 import send from '../assets/send.svg';
 import pallette from '../assets/pallette.svg';
 import camera from '../assets/camera.svg';
@@ -26,8 +26,8 @@ const Icons = {
     fullWeb: fullWeb,
     setting: setting,
     right: right,
-    comment: comment,
-    commentOff: commentOff,
+    // comment: comment,
+    // commentOff: commentOff,
     send: send,
     pallette: pallette,
     camera: camera,

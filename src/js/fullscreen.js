@@ -5,19 +5,19 @@ class FullScreen {
         this.player = player;
         this.lastScrollPosition = { left: 0, top: 0 };
         this.player.events.on('webfullscreen', () => {
-            if (this.player.template.isShowBottomArea) {
-                this.player.comment.showInner();
-                this.player.danmaku.showInnerDanBox();
-                this.player.comment.commentInput.focus();
-            }
+            // if (this.player.template.isShowBottomArea) {
+            //     this.player.comment.showInner();
+            //     this.player.danmaku.showInnerDanBox();
+            //     this.player.comment.commentInput.focus();
+            // }
             this.player.resize();
         });
         this.player.events.on('webfullscreen_cancel', () => {
-            if (this.player.template.isShowBottomArea) {
-                this.player.bottomArea.toggle();
-                this.player.comment.hideInner();
-                this.player.danmaku.hideInnerDanBox();
-            }
+            // if (this.player.template.isShowBottomArea) {
+            //     this.player.bottomArea.toggle();
+            //     this.player.comment.hideInner();
+            //     this.player.danmaku.hideInnerDanBox();
+            // }
             this.player.resize();
             utils.setScrollPosition(this.lastScrollPosition);
         });
@@ -29,12 +29,12 @@ class FullScreen {
             if (this.isFullScreen('browser')) {
                 // 当前是浏览器全屏
                 this.player.events.trigger('fullscreen');
-                if (this.player.template.isShowBottomArea) {
-                    this.player.danmaku.showInnerDanBox();
-                    this.player.comment.showInner();
-                    this.player.comment.commentInput.focus();
-                    this.player.bottomArea.hide();
-                }
+                // if (this.player.template.isShowBottomArea) {
+                //     this.player.danmaku.showInnerDanBox();
+                //     this.player.comment.showInner();
+                //     this.player.comment.commentInput.focus();
+                //     this.player.bottomArea.hide();
+                // }
             } else {
                 //  取消全屏
                 utils.setScrollPosition(this.lastScrollPosition);
@@ -43,12 +43,12 @@ class FullScreen {
 
                 // 由全屏切换为普通网页模式
                 if (!this.isFullScreen('web')) {
-                    this.player.template.controller.classList.remove('dplayer-controller-comment-fullscreen');
-                    if (this.player.template.isShowBottomArea) {
-                        this.player.bottomArea.toggle();
-                        this.player.comment.hideInner();
-                        this.player.danmaku.hideInnerDanBox();
-                    }
+                    // this.player.template.controller.classList.remove('dplayer-controller-comment-fullscreen');
+                    // if (this.player.template.isShowBottomArea) {
+                    //     this.player.bottomArea.toggle();
+                    //     this.player.comment.hideInner();
+                    //     this.player.danmaku.hideInnerDanBox();
+                    // }
                 }
             }
         };
@@ -62,15 +62,15 @@ class FullScreen {
             this.player.resize();
             if (fullEle) {
                 this.player.events.trigger('fullscreen');
-                this.player.comment.showInner();
+                // this.player.comment.showInner();
             } else {
                 utils.setScrollPosition(this.lastScrollPosition);
                 this.player.events.trigger('fullscreen_cancel');
-                this.player.comment.hideInner();
+                // this.player.comment.hideInner();
                 // 由全屏切换为网页全屏
-                if (!this.isFullScreen('web')) {
-                    this.player.template.controller.classList.remove('dplayer-controller-comment-fullscreen');
-                }
+                // if (!this.isFullScreen('web')) {
+                //     this.player.template.controller.classList.remove('dplayer-controller-comment-fullscreen');
+                // }
             }
         };
         if (/Firefox/.test(navigator.userAgent)) {
@@ -132,7 +132,7 @@ class FullScreen {
             this.cancel(anotherType);
         }
 
-        this.player.template.controller.classList.add('dplayer-controller-comment-fullscreen');
+        // this.player.template.controller.classList.add('dplayer-controller-comment-fullscreen');
     }
 
     cancel(type = 'browser') {
@@ -156,7 +156,7 @@ class FullScreen {
                 this.player.container.classList.remove('dplayer-fulled');
                 document.body.classList.remove('dplayer-web-fullscreen-fix');
                 this.player.events.trigger('webfullscreen_cancel');
-                this.player.template.controller.classList.remove('dplayer-controller-comment-fullscreen');
+                // this.player.template.controller.classList.remove('dplayer-controller-comment-fullscreen');
                 break;
         }
     }

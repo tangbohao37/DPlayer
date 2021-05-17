@@ -23,38 +23,38 @@
         .dplayer-icons {
             display: none;
         }
-        .dplayer-icons.dplayer-comment-box {
-            border: none;
-            display: flex;
-        }
+        // .dplayer-icons.dplayer-comment-box {
+        //     border: none;
+        //     display: flex;
+        // }
     }
-    &.dplayer-controller-comment-fullscreen {
-        .dplayer-icons.dplayer-comment-box {
-            border: none;
-            display: flex;
-            margin: 0 auto;
-            .dplayer-comment-box-icon,
-            .dplayer-comment-setting-icon,
-            .dplayer-comment-input {
-                border: none;
-            }
-        }
+    // &.dplayer-controller-comment-fullscreen {
+    //     .dplayer-icons.dplayer-comment-box {
+    //         border: none;
+    //         display: flex;
+    //         margin: 0 auto;
+    //         .dplayer-comment-box-icon,
+    //         .dplayer-comment-setting-icon,
+    //         .dplayer-comment-input {
+    //             border: none;
+    //         }
+    //     }
 
-        .dplayer-comment {
-            display: none !important;
-        }
-        @media (max-width: 900px) {
-            .dplayer-icons.dplayer-comment-box {
-                border: none;
-                display: flex;
-                .dplayer-comment-box-icon,
-                .dplayer-comment-setting-icon,
-                .dplayer-comment-input {
-                    border: none;
-                }
-            }
-        }
-    }
+    //     .dplayer-comment {
+    //         display: none !important;
+    //     }
+    //     @media (max-width: 900px) {
+    //         .dplayer-icons.dplayer-comment-box {
+    //             border: none;
+    //             display: flex;
+    //             .dplayer-comment-box-icon,
+    //             .dplayer-comment-setting-icon,
+    //             .dplayer-comment-input {
+    //                 border: none;
+    //             }
+    //         }
+    //     }
+    // }
     .dplayer-bar-wrap {
         padding: 5px 0;
         cursor: pointer;
@@ -192,13 +192,13 @@
             flex: 1;
             height: 30px;
             position: relative;
-            .dplayer-comment-box-icon,
-            .dplayer-comment-input {
-                color: #fff;
-                &::placeholder {
-                    color: #fff;
-                }
-            }
+            // .dplayer-comment-box-icon,
+            // .dplayer-comment-input {
+            //     color: #fff;
+            //     &::placeholder {
+            //         color: #fff;
+            //     }
+            // }
         }
         &.dplayer-icons-left {
             flex: 1;
