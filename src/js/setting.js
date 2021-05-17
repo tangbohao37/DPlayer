@@ -61,16 +61,18 @@ class Setting {
             // this.hide();
         });
 
-        // speed
-        this.player.template.speed.addEventListener('click', () => {
-            this.player.template.settingBox.classList.add('dplayer-setting-box-narrow');
-            this.player.template.settingBox.classList.add('dplayer-setting-box-speed');
-        });
-        for (let i = 0; i < this.player.template.speedItem.length; i++) {
-            this.player.template.speedItem[i].addEventListener('click', () => {
-                this.player.speed(this.player.template.speedItem[i].dataset.speed);
-                this.hide();
+        if (!this.player.options.live) {
+            // speed
+            this.player.template.speed.addEventListener('click', () => {
+                this.player.template.settingBox.classList.add('dplayer-setting-box-narrow');
+                this.player.template.settingBox.classList.add('dplayer-setting-box-speed');
             });
+            for (let i = 0; i < this.player.template.speedItem.length; i++) {
+                this.player.template.speedItem[i].addEventListener('click', () => {
+                    this.player.speed(this.player.template.speedItem[i].dataset.speed);
+                    this.hide();
+                });
+            }
         }
 
         // danmaku opacity

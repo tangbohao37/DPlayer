@@ -23,7 +23,7 @@
     </div>
     {{ /if }}
 
-    {{ if options.playbackSpeed }}
+    {{ if options.playbackSpeed  }}
     <div class="dplayer-speed" data-balloon="{{ tran('Speed') }}">
         <button class="dplayer-icon dplayer-speed-icon">倍速</button>
         <div class="dplayer-speed-mask">

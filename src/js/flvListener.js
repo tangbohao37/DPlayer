@@ -27,8 +27,7 @@ class FlvListener {
         // 网络或视频错误
         this.flvPlayer.on(this.flvjs.Events.ERROR, (type, detail, response) => {
             // 网络异常 未拉取到数据
-            console.log('网络或视频错误', type, detail, response);
-            if (type === this.flvjs.ErrorTypes.MEDIA_ERROR && response.code === '404') {
+            if (type === this.flvjs.ErrorTypes.NETWORK_ERROR && response.code === 404) {
                 this.player.events.trigger('disconnect');
                 if (this.onStreamErrorInterval && !this.isIntervaling) {
                     // 流拉取失败 需要轮训重新拉取
@@ -38,37 +37,39 @@ class FlvListener {
         });
         // 拉取流信息
         this.flvPlayer.on(this.flvjs.Events.MEDIA_INFO, (...e) => {
-            console.log('拉取流信息', e);
-            // this.player.events.trigger('loadeddata', e);
+            // console.log('拉取流信息', e);
+            this.player.events.trigger('loadeddata', e);
         });
         // 成功拉取数据元信息/成功拉到流
         this.flvPlayer.on(this.flvjs.Events.METADATA_ARRIVED, (...e) => {
-            console.log('成功拉取数据元信息', e);
+            // console.log('成功拉取数据元信息', e);
             this.player.events.trigger('connected', e);
         });
         // 网络异常，已重新连接
         this.flvPlayer.on(this.flvjs.Events.RECOVERED_EARLY_EOF, (...e) => {
-            console.log('网络异常，已重新连接', e);
+            // console.log('网络异常，已重新连接', e);
             this.player.events.trigger('reconnect', e);
         });
         // 断流/加载完成
         this.flvPlayer.on(this.flvjs.Events.LOADING_COMPLETE, (...e) => {
-            console.log('断流/加载完成', e);
-            // this.player.events.trigger('canplaythrough', e);
+            // console.log('断流/加载完成', e);
+            this.player.events.trigger('canplaythrough', e);
         });
         // log 监听
         this.flvjs.LoggingControl.addLogListener((type, str) => {
             if (str.includes('onSourceOpen')) {
                 // 初始化正常，正在尝试拉流
-                console.log('flv初始化正常，正在尝试拉流');
+                // this.player.notice('');
+                // console.log('flv初始化正常，正在尝试拉流');
             }
             if (str.includes('onSourceClose')) {
                 // 服务器关闭流
-                console.log('服务器关闭流');
+                // console.log('服务器关闭流');
             }
             if (str.includes('onSourceEnded')) {
                 // C端停止推流/断流
-                console.log('C端停止推流/断流');
+                this.player.events.trigger('disconnect');
+                // console.log('C端停止推流/断流');
                 if (this.onStreamEndInterval && !this.isIntervaling) {
                     // 流拉取失败 需要轮训重新拉取
                     this.intervalSourceStream();
@@ -77,6 +78,9 @@ class FlvListener {
         });
     }
     offEventListener() {
+        if (!this.hlsPlayer) {
+            return;
+        }
         Object.keys(this.flvjs.Events).forEach((e) => {
             this.hlsPlayer.off(this.flvjs.Events[e]);
         });

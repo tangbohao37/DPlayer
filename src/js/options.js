@@ -28,6 +28,10 @@ export default (options) => {
             options[defaultKey] = defaultOption[defaultKey];
         }
     }
+    if (options.live) {
+        // 直播场景不能调节速度
+        options.playbackSpeed = null;
+    }
     if (options.video) {
         !options.video.type && (options.video.type = 'auto');
     }
