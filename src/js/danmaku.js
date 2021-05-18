@@ -360,7 +360,7 @@ class Danmaku {
         this.showing = false;
         this.pause();
         this.clear();
-        this.template.showDanmakuToggle.forEach((toggle) => (toggle.checked = this.showing));
+        // this.template.showDanmakuToggle.forEach((toggle) => (toggle.checked = this.showing));
         this.events && this.events.trigger('danmaku_hide');
     }
 
@@ -368,7 +368,7 @@ class Danmaku {
         this.seek();
         this.showing = true;
         this.play();
-        this.template.showDanmakuToggle.forEach((toggle) => (toggle.checked = this.showing));
+        // this.template.showDanmakuToggle.forEach((toggle) => (toggle.checked = this.showing));
         this.events && this.events.trigger('danmaku_show');
     }
 

@@ -20,7 +20,7 @@ import ContextMenu from './contextmenu';
 import InfoPanel from './info-panel';
 import tplVideo from '../template/video.art';
 import FlvListener from './flvListener';
-import BottomArea from './bottomArea';
+// import BottomArea from './bottomArea';
 import HlsListener from './hlsListener';
 
 let index = 0;
@@ -77,7 +77,7 @@ class DPlayer {
 
         this.fullScreen = new FullScreen(this);
 
-        this.bottomArea = new BottomArea(this);
+        // this.bottomArea = new BottomArea(this);
 
         this.controller = new Controller(this);
 
@@ -292,12 +292,6 @@ class DPlayer {
             this.play();
         } else {
             this.pause();
-        }
-    }
-
-    setSubContent(text) {
-        if (text) {
-            this.template.bottomAreaLeftInfo.innerHTML = text;
         }
     }
 

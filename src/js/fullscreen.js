@@ -14,7 +14,7 @@ class FullScreen {
         });
         this.player.events.on('webfullscreen_cancel', () => {
             // if (this.player.template.isShowBottomArea) {
-            //     this.player.bottomArea.toggle();
+            // this.player.bottomArea.toggle();
             //     this.player.comment.hideInner();
             //     this.player.danmaku.hideInnerDanBox();
             // }
@@ -33,7 +33,7 @@ class FullScreen {
                 //     this.player.danmaku.showInnerDanBox();
                 //     this.player.comment.showInner();
                 //     this.player.comment.commentInput.focus();
-                //     this.player.bottomArea.hide();
+                // this.player.bottomArea.hide();
                 // }
             } else {
                 //  取消全屏
@@ -45,7 +45,7 @@ class FullScreen {
                 if (!this.isFullScreen('web')) {
                     // this.player.template.controller.classList.remove('dplayer-controller-comment-fullscreen');
                     // if (this.player.template.isShowBottomArea) {
-                    //     this.player.bottomArea.toggle();
+                    // this.player.bottomArea.toggle();
                     //     this.player.comment.hideInner();
                     //     this.player.danmaku.hideInnerDanBox();
                     // }
@@ -123,7 +123,7 @@ class FullScreen {
             case 'web':
                 this.player.container.classList.add('dplayer-fulled');
                 document.body.classList.add('dplayer-web-fullscreen-fix');
-                this.player.bottomArea.hide();
+                // this.player.bottomArea.hide();
                 this.player.events.trigger('webfullscreen');
                 break;
         }

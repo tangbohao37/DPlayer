@@ -2,16 +2,15 @@
 <div class="dplayer-main-container">
 {{ include './player.art' }}
 </div>
-{{ if isShowBottomArea }}
+  <!--
 <div class="dplayer-video-bottom-area">
   <div class="dplayer-video-bottom-area-left">
     <p class="dplayer-video-bottom-area-left-info">{{ subContent }}</p>
     <div class="show-dan-box">
     {{ include './controller/show-dan.art' }}
     </div>
+   </div>
+    <div class="dplayer-video-bottom-area-right">
   </div>
-  <div class="dplayer-video-bottom-area-right">
-    <!-- 底部区域 -->
-  </div>
-</div>
-{{ /if }}
+ </div>
+ -->

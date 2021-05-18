@@ -8,8 +8,8 @@ class Template {
         this.options = options.options;
         this.index = options.index;
         this.tran = options.tran;
-        this.isShowBottomArea = this.options.isShowBottomArea;
-        this.subContent = this.options.subContent;
+        // this.isShowBottomArea = this.options.isShowBottomArea;
+        // this.subContent = this.options.subContent;
         this.init();
     }
 
@@ -21,8 +21,8 @@ class Template {
             tran: this.tran,
             icons: Icons,
             mobile: utils.isMobile,
-            subContent: this.subContent,
-            isShowBottomArea: this.isShowBottomArea,
+            // subContent: this.subContent,
+            // isShowBottomArea: this.isShowBottomArea,
             video: {
                 current: true,
                 pic: this.options.video.pic,
@@ -60,7 +60,7 @@ class Template {
         this.loop = this.container.querySelector('.dplayer-setting-loop');
         this.loopToggle = this.container.querySelector('.dplayer-setting-loop .dplayer-toggle-setting-input');
         this.showDanmaku = this.container.querySelectorAll('.dplayer-setting-showdan');
-        this.showDanmakuToggle = this.container.querySelectorAll('.dplayer-showdan-setting-input');
+        // this.showDanmakuToggle = this.container.querySelectorAll('.dplayer-showdan-setting-input');
         this.unlimitDanmaku = this.container.querySelector('.dplayer-setting-danunlimit');
         this.unlimitDanmakuToggle = this.container.querySelector('.dplayer-danunlimit-setting-input');
         this.speed = this.container.querySelector('.dplayer-speed');
@@ -103,10 +103,10 @@ class Template {
         this.infoDanmakuId = this.container.querySelector('.dplayer-info-panel-item-danmaku-id .dplayer-info-panel-item-data');
         this.infoDanmakuApi = this.container.querySelector('.dplayer-info-panel-item-danmaku-api .dplayer-info-panel-item-data');
         this.infoDanmakuAmount = this.container.querySelector('.dplayer-info-panel-item-danmaku-amount .dplayer-info-panel-item-data');
-        this.bottomArea = this.container.querySelector('.dplayer-video-bottom-area');
-        this.bottomAreaRight = this.container.querySelector('.dplayer-video-bottom-area .dplayer-video-bottom-area-right');
-        this.bottomAreaLeft = this.container.querySelector('.dplayer-video-bottom-area .dplayer-video-bottom-area-left');
-        this.bottomAreaLeftInfo = this.container.querySelector('.dplayer-video-bottom-area .dplayer-video-bottom-area-left-info');
+        // this.bottomArea = this.container.querySelector('.dplayer-video-bottom-area');
+        // this.bottomAreaRight = this.container.querySelector('.dplayer-video-bottom-area .dplayer-video-bottom-area-right');
+        // this.bottomAreaLeft = this.container.querySelector('.dplayer-video-bottom-area .dplayer-video-bottom-area-left');
+        // this.bottomAreaLeftInfo = this.container.querySelector('.dplayer-video-bottom-area .dplayer-video-bottom-area-left-info');
     }
 }
 
