@@ -12,7 +12,7 @@ function animate() {
 requestAnimationFrame(animate);
 
 initPlayers();
-handleEvent();
+// handleEvent();
 
 function handleEvent() {
     document.getElementById('dplayer-dialog').addEventListener('click', (e) => {
@@ -59,7 +59,6 @@ function initPlayers() {
         container: document.getElementById('dplayer1'),
         preload: 'none',
         subContent:"123123正在观看",
-        isShowBottomArea:true,
         screenshot: true,
         top:"<div id='test' style='display: flex;flex: 1;font-size:40px; color:#fff' onclick='fun()'>这里是顶部区域</div>",
         live:false,
@@ -145,9 +144,6 @@ function initPlayers() {
     dp1.on('error',(e)=>{
       console.log('error',e)
     })
-    dp1.on('sources_tatus_change',(e)=>{
-      console.log('on_sources_tatus_change',e)
-    })
     dp1.on('reconnect',(e)=>{
       console.log('reconnect',e)
     })
@@ -173,12 +169,12 @@ function initPlayers() {
         'subtitle_show', 'subtitle_hide', 'subtitle_change'
     ];
     const eventsEle = document.getElementById('events');
-    for (let i = 0; i < events.length; i++) {
-        dp2.on(events[i], (info) => {
-            eventsEle.innerHTML += '<p>Event: ' + events[i] + '</p>';
-            eventsEle.scrollTop = eventsEle.scrollHeight;
-        });
-    }
+    // for (let i = 0; i < events.length; i++) {
+    //     dp2.on(events[i], (info) => {
+    //         eventsEle.innerHTML += '<p>Event: ' + events[i] + '</p>';
+    //         eventsEle.scrollTop = eventsEle.scrollHeight;
+    //     });
+    // }
 
     // dp3
     // window.dp3 = new DPlayer({

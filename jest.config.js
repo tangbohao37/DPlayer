@@ -1,9 +1,9 @@
 /*
- * For a detailed explanation regarding each configuration property and type check, visit:
+ * For a detailed explanation regarding each configuration property, visit:
  * https://jestjs.io/docs/en/configuration.html
  */
 
-export default {
+module.exports = {
     // All imported modules in your tests should be mocked automatically
     // automock: false,
 
@@ -31,7 +31,7 @@ export default {
     // ],
 
     // Indicates which provider should be used to instrument code for coverage
-    // coverageProvider: "babel",
+    coverageProvider: 'v8',
 
     // A list of reporter names that Jest uses when writing coverage reports
     // coverageReporters: [
@@ -152,9 +152,7 @@ export default {
     // ],
 
     // An array of regexp pattern strings that are matched against all test paths, matched tests are skipped
-    // testPathIgnorePatterns: [
-    //   "/node_modules/"
-    // ],
+    testPathIgnorePatterns: ['/node_modules/', './__tests__/utils.js'],
 
     // The regexp pattern or array of patterns that Jest uses to detect test files
     // testRegex: [],
@@ -184,7 +182,7 @@ export default {
     // unmockedModulePathPatterns: undefined,
 
     // Indicates whether each individual test should be reported during the run
-    // verbose: undefined,
+    verbose: false,
 
     // An array of regexp patterns that are matched against all source file paths before re-running tests in watch mode
     // watchPathIgnorePatterns: [],
