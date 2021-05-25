@@ -100,8 +100,6 @@ function initPlayers() {
         // }
     });
 
-    window.dp1.setSubContent("8人正在观看")
-
     // dp2
     // window.dp2 = new DPlayer({
     //     container: document.getElementById('dplayer2'),

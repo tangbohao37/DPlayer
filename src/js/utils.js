@@ -147,6 +147,24 @@ const utils = {
             };
         });
     },
+    sleep(time) {
+        return new Promise((resolve) =>
+            setTimeout(() => {
+                resolve();
+            }, time)
+        );
+    },
+    interval(fun, intervalTimeOut = 0) {
+        if (fun) {
+            this.sleep(intervalTimeOut).then(() => {
+                fun &&
+                    fun().catch(() => {
+                        // TODO：限定catch
+                        this.interval(fun, intervalTimeOut);
+                    });
+            });
+        }
+    },
 };
 
 export default utils;

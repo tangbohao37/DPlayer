@@ -14,7 +14,7 @@ import Timer from './timer';
 import Bezel from './bezel';
 import Controller from './controller';
 import Setting from './setting';
-// import Comment from './comment';
+import Comment from './comment';
 import HotKey from './hotkey';
 import ContextMenu from './contextmenu';
 import InfoPanel from './info-panel';
@@ -119,7 +119,7 @@ class DPlayer {
                 tran: (msg) => this.tran(msg),
             });
 
-            // this.comment = new Comment(this);
+            this.comment = new Comment(this);
             this.template.danmakuLoading.style.display = 'none';
         }
 

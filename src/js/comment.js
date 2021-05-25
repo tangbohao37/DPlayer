@@ -1,11 +1,11 @@
 // import Icons from './icons';
-import utils from './utils';
+// import utils from './utils';
 // import tplComment from '../template/controller/comment.art';
 
 class Comment {
     constructor(player) {
         this.player = player;
-        this.initComment('bottom');
+        // this.initComment('bottom');
         this.bind();
         this.initListener();
     }
@@ -15,47 +15,44 @@ class Comment {
     //         icons: Icons,
     //         tran: this.player.tran,
     //     });
-    // this.commentEle = new DOMParser().parseFromString(commentDom, 'text/html').body.firstChild;
-    // if (type === 'inner') {
-    //     this.commentInnerBox.insertBefore(this.commentEle, this.commentInnerBox.getElementsByTagName('div')[0]);
-    // }
-    // if (type === 'bottom') {
-    //     this.player.template.bottomAreaRight.insertBefore(this.commentEle, this.player.template.bottomAreaRight.getElementsByTagName('div')[0]);
-    // }
+    //     this.commentEle = new DOMParser().parseFromString(commentDom, 'text/html').body.firstChild;
+    //     if (type === 'inner') {
+    //         this.commentInnerBox.insertBefore(this.commentEle, this.commentInnerBox.getElementsByTagName('div')[0]);
+    //     }
+    //     if (type === 'bottom') {
+    //         this.player.template.bottomAreaRight.insertBefore(this.commentEle, this.player.template.bottomAreaRight.getElementsByTagName('div')[0]);
+    //     }
     // }
 
     initListener() {
         // this.player.template.mask.addEventListener('click', () => {
         //     this.hide();
         // });
-        this.commentSettingButton.addEventListener('click', () => {
-            this.toggleSetting();
-        });
-
-        this.commentColorSettingBox.addEventListener('click', () => {
-            const sele = this.commentColorSettingBox.querySelector('input:checked+span');
-            if (sele) {
-                const color = this.commentColorSettingBox.querySelector('input:checked').value;
-                // this.commentSettingFill.style.fill = color;
-                this.commentInput.style.color = color;
-                // this.commentSendFill.style.fill = color;
-            }
-        });
-
-        this.commentInput.addEventListener('click', () => {
-            this.hideSetting();
-        });
-        this.commentInput.addEventListener('keydown', (e) => {
-            const event = e || window.event;
-            if (event.keyCode === 13) {
-                this.send();
-            }
-        });
-
-        this.commentSendButton.addEventListener('click', () => {
-            this.send();
-            this.hide();
-        });
+        // this.commentSettingButton.addEventListener('click', () => {
+        //     this.toggleSetting();
+        // });
+        // this.commentColorSettingBox.addEventListener('click', () => {
+        //     const sele = this.commentColorSettingBox.querySelector('input:checked+span');
+        //     if (sele) {
+        //         const color = this.commentColorSettingBox.querySelector('input:checked').value;
+        //         // this.commentSettingFill.style.fill = color;
+        //         this.commentInput.style.color = color;
+        //         // this.commentSendFill.style.fill = color;
+        //     }
+        // });
+        // this.commentInput.addEventListener('click', () => {
+        //     this.hideSetting();
+        // });
+        // this.commentInput.addEventListener('keydown', (e) => {
+        //     const event = e || window.event;
+        //     if (event.keyCode === 13) {
+        //         this.send();
+        //     }
+        // });
+        // this.commentSendButton.addEventListener('click', () => {
+        //     this.send();
+        //     this.hide();
+        // });
     }
 
     show() {
@@ -119,25 +116,23 @@ class Comment {
     }
 
     send() {
-        this.commentInput.blur();
-
+        // this.commentInput.blur();
         // text can't be empty
-        if (!this.commentInput.value.replace(/^\s+|\s+$/g, '')) {
-            this.player.notice(this.player.tran('Please input danmaku content!'));
-            return;
-        }
-
-        this.player.danmaku.send(
-            {
-                text: this.commentInput.value,
-                color: utils.color2Number(this.player.container.querySelector('.dplayer-comment-setting-color input:checked').value),
-                type: parseInt(this.player.container.querySelector('.dplayer-comment-setting-type input:checked').value),
-            },
-            () => {
-                this.commentInput.value = '';
-                this.hide();
-            }
-        );
+        // if (!this.commentInput.value.replace(/^\s+|\s+$/g, '')) {
+        //     this.player.notice(this.player.tran('Please input danmaku content!'));
+        //     return;
+        // }
+        // this.player.danmaku.send(
+        //     {
+        //         text: this.commentInput.value,
+        //         color: utils.color2Number(this.player.container.querySelector('.dplayer-comment-setting-color input:checked').value),
+        //         type: parseInt(this.player.container.querySelector('.dplayer-comment-setting-type input:checked').value),
+        //     },
+        //     () => {
+        //         this.commentInput.value = '';
+        //         this.hide();
+        //     }
+        // );
     }
 }
 

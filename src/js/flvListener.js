@@ -88,23 +88,23 @@ class FlvListener {
     intervalSourceStream() {
         const src = this.videoSrc;
         this.isIntervaling = true;
-        const intervalCheck = setInterval(() => {
-            utils.checkStream(src).then(() => {
-                // 请求连通
-                clearInterval(intervalCheck);
-                this.isIntervaling = false;
-                if (this.flvPlayer) {
-                    //  重新创建实例
-                    this.offEventListener();
-                    this.flvPlayer.detachMediaElement();
-                    this.flvPlayer.destroy();
-                    this.flvPlayer = null;
-                    this.player.createFlvInstance(src, this.player.template.video);
-                    // this.flvPlayer = window.flvjs.createPlayer({ type: 'flv', url: url, isLive: this.player.options.live }, this.player.options.pluginOptions.flv.config);
-                }
-                this.player.events.trigger('reconnect');
-            });
-        }, this.intervalTimeOut);
+
+        utils.interval(
+            () =>
+                utils.checkStream(src).then(() => {
+                    this.isIntervaling = false;
+                    if (this.flvPlayer) {
+                        //  重新创建实例
+                        this.offEventListener();
+                        this.flvPlayer.detachMediaElement();
+                        this.flvPlayer.destroy();
+                        this.flvPlayer = null;
+                        this.player.createFlvInstance(src, this.player.template.video);
+                    }
+                    this.player.events.trigger('reconnect');
+                }),
+            5000
+        );
     }
 }
 

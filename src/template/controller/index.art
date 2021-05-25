@@ -2,6 +2,7 @@
 <div class="dplayer-controller">
     {{ include './icons-left.art'}}
     <div class="dplayer-icons dplayer-inner-comment-box">
+
     </div>
     {{ include './icons-right.art'}}
     <div class="dplayer-bar-wrap">

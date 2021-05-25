@@ -94,22 +94,23 @@ class HlsListener {
     intervalSourceStream() {
         const src = this.videoSrc;
         this.isIntervaling = true;
-        const intervalCheck = setInterval(() => {
-            utils.checkStream(src).then(() => {
-                // 请求连通
-                clearInterval(intervalCheck);
-                this.isIntervaling = false;
-                if (this.hlsPlayer) {
-                    // 销毁实例
-                    this.offEventListener();
-                    this.hlsPlayer.detachMedia();
-                    this.hlsPlayer.destroy();
-                    // 重新创建实例
-                    this.player.createHlsInstance(src, this.player.template.video);
-                }
-                this.player.events.trigger('reconnect');
-            });
-        }, this.intervalTimeOut);
+        utils.interval(
+            () =>
+                utils.checkStream(src).then(() => {
+                    // 请求连通
+                    this.isIntervaling = false;
+                    if (this.hlsPlayer) {
+                        // 销毁实例
+                        this.offEventListener();
+                        this.hlsPlayer.detachMedia();
+                        this.hlsPlayer.destroy();
+                        // 重新创建实例
+                        this.player.createHlsInstance(src, this.player.template.video);
+                    }
+                    this.player.events.trigger('reconnect');
+                }),
+            5000
+        );
     }
 }
 
