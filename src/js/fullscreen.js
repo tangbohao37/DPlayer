@@ -10,6 +10,9 @@ class FullScreen {
             //     this.player.danmaku.showInnerDanBox();
             //     this.player.comment.commentInput.focus();
             // }
+
+            // TODO: 对外暂时未区分 浏览器全屏和web全屏
+            this.player.events.trigger('fullscreen');
             this.player.resize();
         });
         this.player.events.on('webfullscreen_cancel', () => {
@@ -18,12 +21,14 @@ class FullScreen {
             //     this.player.comment.hideInner();
             //     this.player.danmaku.hideInnerDanBox();
             // }
+
+            // TODO: 对外暂时未区分 浏览器全屏和web全屏
+            this.player.events.trigger('fullscreen_cancel');
             this.player.resize();
             utils.setScrollPosition(this.lastScrollPosition);
         });
 
         const fullscreenchange = () => {
-            console.log('触发 fullscreenchange');
             // 全屏改变事件
             this.player.resize();
             if (this.isFullScreen('browser')) {
@@ -53,7 +58,6 @@ class FullScreen {
             }
         };
         const docfullscreenchange = () => {
-            console.log('触发：docfullscreenchange');
             // 文档触发全屏改变事件
             const fullEle = document.fullscreenElement || document.mozFullScreenElement || document.msFullscreenElement;
             if (fullEle && fullEle !== this.player.container) {
