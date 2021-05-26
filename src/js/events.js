@@ -63,7 +63,9 @@ class Events {
             if (!this.events[name]) {
                 this.events[name] = [];
             }
-            this.events[name].push(callback);
+            if (!this.events[name].includes(callback)) {
+                this.events[name].push(callback);
+            }
         }
     }
 

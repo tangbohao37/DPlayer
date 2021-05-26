@@ -151,6 +151,10 @@ function initPlayers() {
       console.log('connected',e)
     })
 
+    dp1.on('fullscreen_cancel',(e)=>{
+      console.log('fullscreen_cancel')
+    })
+
     const events = [
         'abort', 'canplay', 'canplaythrough', 'durationchange', 'emptied', 'ended', 'error',
         'loadeddata', 'loadedmetadata', 'loadstart', 'mozaudioavailable', 'pause', 'play',
