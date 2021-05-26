@@ -1,38 +1,4 @@
----
-sidebar: auto
----
-
 # 指南
-
-# DPlayer
-
-🍭 Wow, such a lovely HTML5 danmaku video player
-
-<DPlayer :immediate="true"></DPlayer>
-
-&nbsp;
-
-## Special Thanks
-
-### Special Sponsors
-
-<div>
-<a href="https://www.cdnbye.com" target="_blank">
-    <img height="60px" src="https://cdnbye.oss-cn-beijing.aliyuncs.com/pic/cdnbye-dp.jpeg">
-</a>
-</div>
-
-<div>
-<a href="https://www.dogecloud.com/?ref=dplayer" target="_blank">
-    <img height="60px" src="https://i.imgur.com/C2NgugY.png">
-</a>
-</div>
-
-### Sponsors
-
-| [极酷社](https://www.acg.app) |
-| :---------------------------: |
-
 
 ## 安装
 
@@ -88,8 +54,8 @@ DPlayer 有丰富的参数可以自定义你的播放器实例
 | -------------------- | ---------------------------------- | ------------------------------------------------------------------------------------------------------- |
 | container            | document.querySelector('.dplayer') | 播放器容器元素                                                                                          |
 | live                 | false                              | 开启直播模式, 见[#直播](#直播)                                                                          |
-| autoplay             | false                              | 视频自动播放                                                                                            |
-| theme                | '#b7daff'                          | 主题色                                                                                                  |
+| autoplay             | false                              | 视频自动播放(Chrome 被禁止,需要自行启动)                                                                |
+| theme                | '#b7daff'                          | 主题（）色                                                                                              |
 | loop                 | false                              | 视频循环播放                                                                                            |
 | lang                 | navigator.language.toLowerCase()   | 可选值: 'en', 'zh-cn', 'zh-tw'                                                                          |
 | screenshot           | false                              | 开启截图，如果开启，视频和视频封面需要允许跨域                                                          |

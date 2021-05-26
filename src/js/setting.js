@@ -40,6 +40,7 @@ class Setting {
                     this.showDanmaku = false;
                     this.player.danmaku.hide();
                 }
+                // TODO： 本地缓存管理
                 this.player.user.set('danmaku', this.showDanmaku ? 1 : 0);
                 // this.hide();
             });

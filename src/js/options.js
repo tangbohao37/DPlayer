@@ -6,7 +6,7 @@ export default (options) => {
     const defaultOption = {
         container: options.element || document.getElementsByClassName('dplayer')[0],
         live: false,
-        autoplay: false,
+        autoplay: false, // TODO：暂时弃用自动播放
         theme: '#b7daff',
         loop: false,
         lang: (navigator.language || navigator.browserLanguage).toLowerCase(),

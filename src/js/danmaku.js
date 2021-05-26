@@ -92,7 +92,6 @@ class Danmaku {
                     // 初始化报 弹幕加载失败
                     this.options.error(msg || this.options.tran('Danmaku load failed'));
                     results[i] = [];
-
                     ++readCount;
                     if (readCount === endpoints.length) {
                         callback(results);

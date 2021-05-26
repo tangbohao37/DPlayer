@@ -81,7 +81,6 @@ class DPlayer {
 
         this.controller = new Controller(this);
 
-        // 如果需要显示底部区域 且 有弹幕配置
         if (this.options.danmaku) {
             this.danmaku = new Danmaku({
                 template: this.template,
@@ -200,6 +199,7 @@ class DPlayer {
         this.template.mobilePlayButton.innerHTML = Icons.pause;
 
         if (!fromNative) {
+            // TODO： chrome 暂不支持自动播放
             const playedPromise = Promise.resolve(this.video.play());
             playedPromise
                 .catch(() => {
